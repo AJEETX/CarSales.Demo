@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { VehicleProps, Vehicle } from '../model/vehicle.model';
+import { VehicleProps} from '../model/vehicle.model';
 
 @Injectable()
 export class DataService {
@@ -14,5 +14,4 @@ export class DataService {
  getVehicleProps() {
     return this.vehicleProps;
   }
-
 }

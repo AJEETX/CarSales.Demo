@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {VehicleService} from '../shared/services/vehicle.service';
-import {VehicleType} from '../shared/model/vehicle.model';
 
 @Component({
   selector: 'app-home',
