@@ -30,7 +30,6 @@ namespace CarSales.Demo.Api.Domain
                 return e.Message;//shout/catch/throw/log
             }
         }
-
         public async Task<Vehicle> GetSpecificVehicle(int Id)
         {
             Vehicle targetVehicle = null;
@@ -46,7 +45,6 @@ namespace CarSales.Demo.Api.Domain
             }
             return targetVehicle;
         }
-
         public async Task<string> UpdateVehicle(Vehicle vehicle)
         {
             if (vehicle == null) return null;
@@ -66,7 +64,6 @@ namespace CarSales.Demo.Api.Domain
                 return e.Message;//shout/catch/throw/log
             }
         }
-
         public async Task<IEnumerable<Vehicle>> ViewAllVehicle()
         {
             try

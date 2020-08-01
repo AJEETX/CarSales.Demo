@@ -51,7 +51,6 @@ namespace CarSales.Demo.Api.Domain
                 };
             }
         }
-
         public Vehicle GetVehicleType(VehicleType vehicleType)
         {
             var vehicle = vehicleDictionary[vehicleType];

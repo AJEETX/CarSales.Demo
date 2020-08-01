@@ -33,7 +33,6 @@ namespace CarSales.Demo.Api.Domain
             }
             else return null;
         }
-
         Car GetCar(JObject vehicleObj)
         {
             return JsonConvert.DeserializeObject<Car>(vehicleObj.ToString());

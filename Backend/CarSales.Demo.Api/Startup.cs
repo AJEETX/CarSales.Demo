@@ -41,20 +41,16 @@ public class Startup
                 });
             });
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseCors(c =>
                 c.AllowAnyOrigin()
-            );
-            app.UseMvc(routes =>
+            ).UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
-            })
-            .UseSwagger().UseSwaggerUI(c =>
+            }).UseSwagger().UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "CarSales Demo Api");
                 c.RoutePrefix = "";

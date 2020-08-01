@@ -27,7 +27,6 @@ namespace CarSales.Demo.Api.Domain
             _dbService = dbService;
             _vehicleConverter = vehicleConverter;
         }
-
         public async Task<string> AddVehicle(JObject vehicleJObject)
         {
 
@@ -45,7 +44,6 @@ namespace CarSales.Demo.Api.Domain
                 return e.Message; //shout/catch/throw/log
             }
         }
-
         public async Task<IEnumerable<Vehicle>> GetAllVehicles()
         {
             try
@@ -57,7 +55,6 @@ namespace CarSales.Demo.Api.Domain
                 return null; //shout/catch/throw/log
             }
         }
-
         public async Task<Vehicle> GetSpecificVehicle(string type, int Id)
         {
             VehicleType vehicletype;
@@ -72,7 +69,6 @@ namespace CarSales.Demo.Api.Domain
                 return null; //shout/catch/throw/log
             }
         }
-
         public async Task<IEnumerable<VehicleDetail>> GetVehicleProperties(string vehicleType)
         {
             VehicleType enumName;
@@ -91,7 +87,6 @@ namespace CarSales.Demo.Api.Domain
                 return null; //shout/catch/throw/log
             }
         }
-
         public IEnumerable<string> GetVehicleTypes()
         {
             try
@@ -103,7 +98,6 @@ namespace CarSales.Demo.Api.Domain
                 return Enumerable.Empty<string>();//shout/catch/throw/log
             }
         }
-
         public async Task<string> UpdateVehicle(JObject vehicleJObject)
         {
             Vehicle vehicle;

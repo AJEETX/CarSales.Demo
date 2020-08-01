@@ -26,7 +26,6 @@ namespace CarSales.Demo.Api.Domain
             _carService = carService;
             dict.Add(VehicleType.CAR, _carService);
         }
-
         public async Task<string> AddVehicle(Vehicle vehicle)
         {
             try
@@ -38,7 +37,6 @@ namespace CarSales.Demo.Api.Domain
                 return e.Message;
             }
         }
-
         public async Task<IEnumerable<Vehicle>> GetAllVehicles()
         {
             try
@@ -52,7 +50,6 @@ namespace CarSales.Demo.Api.Domain
                 return null;
             }
         }
-
         async Task<IEnumerable<Vehicle>> GetAll(IEnumerable<VehicleType> vehicleTypes)
         {
             try
@@ -71,7 +68,6 @@ namespace CarSales.Demo.Api.Domain
                 return null;
             }
         }
-
         public async Task<string> UpdateVehicle(Vehicle vehicle)
         {
             try
@@ -83,7 +79,6 @@ namespace CarSales.Demo.Api.Domain
                 return e.Message;
             }
         }
-
         public async Task<Vehicle> GetSpecificVehicle(VehicleType type, int Id)
         {
             try

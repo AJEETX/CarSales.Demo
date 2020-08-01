@@ -1,4 +1,4 @@
-    namespace CarSales.Demo.Api.Model
+namespace CarSales.Demo.Api.Model
 {
     public enum VehicleType
     {
