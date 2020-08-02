@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app.router';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { VehiclelistComponent } from './vehiclelist/vehiclelist.component';
 import { VehicleService} from './shared/services/vehicle.service';
 import { DataService} from './shared/services/data.service';
@@ -17,7 +16,6 @@ import { AddComponent } from './vehiclelist/addvehicle/addvehicle.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     VehiclelistComponent,
     DropdownDirective,
     ErrorComponentComponent,

@@ -10,12 +10,7 @@ namespace CarSales.Demo.Api.Domain
     {
         Task<string> AddVehicle(Vehicle vehicle);
 
-        Task<string> UpdateVehicle(Vehicle vehicle);
-
         Task<IEnumerable<Vehicle>> GetAllVehicles();
-
-        Task<Vehicle> GetSpecificVehicle(VehicleType vehicletype, int Id);
-
     }
     class DbService : IDbService
     {
@@ -64,28 +59,6 @@ namespace CarSales.Demo.Api.Domain
                 return vehicles;
             }
             catch
-            {
-                return null;
-            }
-        }
-        public async Task<string> UpdateVehicle(Vehicle vehicle)
-        {
-            try
-            {
-                return await dict[vehicle.VehicleType].UpdateVehicle(vehicle);
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-        }
-        public async Task<Vehicle> GetSpecificVehicle(VehicleType type, int Id)
-        {
-            try
-            {
-                return await dict[type].GetSpecificVehicle(Id);
-            }
-            catch( Exception)
             {
                 return null;
             }

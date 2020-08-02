@@ -12,9 +12,7 @@ namespace CarSales.Demo.Api.Domain
         IEnumerable<string> GetVehicleTypes();
         Task<IEnumerable<VehicleDetail>> GetVehicleProperties(string vehicleType);
         Task<string> AddVehicle(JObject vehicleJObject);
-        Task<string> UpdateVehicle(JObject vehicleJObject);
         Task<IEnumerable<Vehicle>> GetAllVehicles();
-        Task<Vehicle> GetSpecificVehicle(string type, int Id);
     }
     class VehicleService : IVehicleService
     {
@@ -55,20 +53,6 @@ namespace CarSales.Demo.Api.Domain
                 return null; //shout/catch/throw/log
             }
         }
-        public async Task<Vehicle> GetSpecificVehicle(string type, int Id)
-        {
-            VehicleType vehicletype;
-            try
-            {
-                if (Enum.TryParse(type, true, out vehicletype))
-                    return await _dbService.GetSpecificVehicle(vehicletype, Id);
-                else return null;
-            }
-            catch
-            {
-                return null; //shout/catch/throw/log
-            }
-        }
         public async Task<IEnumerable<VehicleDetail>> GetVehicleProperties(string vehicleType)
         {
             VehicleType enumName;
@@ -96,20 +80,6 @@ namespace CarSales.Demo.Api.Domain
             catch
             {
                 return Enumerable.Empty<string>();//shout/catch/throw/log
-            }
-        }
-        public async Task<string> UpdateVehicle(JObject vehicleJObject)
-        {
-            Vehicle vehicle;
-            try
-            {
-                vehicle = _vehicleConverter.Convert(vehicleJObject);
-
-                return await _dbService.UpdateVehicle(vehicle);
-            }
-            catch (Exception e)
-            {
-                return e.Message; //shout/catch/throw/log
             }
         }
     }

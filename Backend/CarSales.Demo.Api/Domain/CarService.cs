@@ -20,8 +20,7 @@ namespace CarSales.Demo.Api.Domain
             if (vehicle == null) return null;
             try
             {
-                Car car = vehicle as Car;
-                _context.Add(car);
+                _context.Add(vehicle);
                 await _context.SaveChangesAsync();
                 return "Success";
             }
