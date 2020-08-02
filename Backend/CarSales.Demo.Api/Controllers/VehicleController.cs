@@ -5,10 +5,12 @@ using CarSales.Demo.Api.Domain;
 using CarSales.Demo.Api.Model;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using Swashbuckle.AspNetCore.Examples;
 
 namespace CarSales.Demo.Api.Controllers
 {
     [Produces("application/json")]
+    [Consumes("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class VehicleController : ControllerBase
@@ -102,6 +104,7 @@ namespace CarSales.Demo.Api.Controllers
         /// <returns></returns>
         [HttpPost("Add")]
         [ProducesResponseType(200, Type = typeof(string))]
+        [SwaggerRequestExample(typeof(Car), typeof(VehiclRequestExample))]
         [ProducesResponseType(400)]
         public async Task<ActionResult<string>> AddVehicle([FromBody]JObject vehicle)
         {

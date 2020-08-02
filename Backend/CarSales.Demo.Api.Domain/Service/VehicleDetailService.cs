@@ -11,7 +11,6 @@ namespace CarSales.Demo.Api.Domain
     {
         Task<IEnumerable<VehicleDetail>> GetVehicleProperties(VehicleType vehicleType);
         Vehicle GetVehicleType(VehicleType vehicleType);
-
     }
     partial class VehicleDetailService : IVehicleDetailService
     {
@@ -27,9 +26,9 @@ namespace CarSales.Demo.Api.Domain
             {
                 vehicleProperties = await Task.Run(() => GetProperties(vehicleType));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //log
+                throw new Exception(ex.Message);//log
             }
             return vehicleProperties;
 

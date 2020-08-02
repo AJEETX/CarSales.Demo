@@ -27,7 +27,7 @@ namespace CarSales.Demo.Api.Domain
             }
             catch(Exception ex)
             {
-                throw new Exception(ex.Message);//shout/catch/throw/log
+                throw new Exception(ex.Message);//log
             }
         }
         public override Car Get<Car>(JObject vehicleObj)

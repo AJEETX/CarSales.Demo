@@ -32,7 +32,7 @@ namespace CarSales.Demo.Api.Domain
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);//shout/catch/throw/log
+                throw new Exception(e.Message);//log
             }
             return result;
         }

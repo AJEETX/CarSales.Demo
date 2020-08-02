@@ -7,7 +7,7 @@ using System.Text;
 
 namespace CarSales.Demo.Api.Domain.Extension
 {
-    public static class IServiceCollectionExtension
+    public static class Extension
     {
         public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
@@ -19,4 +19,5 @@ namespace CarSales.Demo.Api.Domain.Extension
             return services;
         }
     }
+
 }
