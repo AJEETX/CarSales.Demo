@@ -11,7 +11,6 @@ namespace CarSales.Demo.Api.Domain.Helper
             return JObject.FromObject(new Car()
             {
                 Make = "JEEP",
-                Id = 1,
                 Model = "Grand Cherokee",
                 Doors = 5,
                 Wheels = 6,
