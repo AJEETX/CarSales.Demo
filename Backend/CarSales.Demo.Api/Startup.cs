@@ -20,11 +20,9 @@ namespace CarSales.Demo.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
-            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
+            services.AddCors().AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddCustomServices();
-            services.AddSwaggerGen(c =>
+            services.AddCustomServices().AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
                 {
@@ -35,15 +33,13 @@ namespace CarSales.Demo.Api
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseCors(c =>
-                c.WithOrigins("http://localhost:5000").AllowAnyHeader().AllowAnyMethod()
-            )
-            .UseMvc()
-            .UseSwagger().UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CarSales Demo Api");
-                c.RoutePrefix = "";
-            });
+            app.UseCors()
+                .UseMvc()
+                .UseSwagger().UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "CarSales Demo Api");
+                    c.RoutePrefix = "";
+                });
         }
     }    
 }

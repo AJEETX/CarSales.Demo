@@ -19,7 +19,7 @@ namespace CarSales.Demo.Api.Domain
         readonly IVehicleDetailService  _vehicleDetailService;
         readonly IVehicleTableService _vehicleTableService;
         readonly IVehicleConverter _vehicleConverter;
-        public VehicleService(VehicleDetailService vehicleDetailService, IVehicleTableService vehicleTableService, IVehicleConverter vehicleConverter)
+        public VehicleService(IVehicleDetailService vehicleDetailService, IVehicleTableService vehicleTableService, IVehicleConverter vehicleConverter)
         {
             _vehicleDetailService = vehicleDetailService;
             _vehicleTableService = vehicleTableService;

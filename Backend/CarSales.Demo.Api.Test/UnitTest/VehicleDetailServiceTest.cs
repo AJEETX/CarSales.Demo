@@ -5,14 +5,14 @@ using Xunit;
 
 namespace CarSales.Demo.Api.Test.UnitTest
 {
-    public class VehicleStrategyContextTest
+    public class VehicleDetailServiceTest
     {
 
         [Fact]
         public void GetVehicleProperties_returns_all_vehicles_properties_with_help_of_dictionary()
         {
             //given
-            var sut = new VehicleStrategyContext();
+            var sut = new VehicleDetailService();
 
             //when
             var result = sut.GetVehicleProperties(VehicleType.CAR);
@@ -25,7 +25,7 @@ namespace CarSales.Demo.Api.Test.UnitTest
         public void GetVehicleType_returns_all_vehicle_type()
         {
             //given
-            var sut = new VehicleStrategyContext();
+            var sut = new VehicleDetailService();
 
             //when
             var result = sut.GetVehicleType(VehicleType.CAR);

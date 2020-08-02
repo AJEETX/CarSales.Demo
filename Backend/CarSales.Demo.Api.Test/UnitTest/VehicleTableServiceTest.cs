@@ -12,7 +12,7 @@ namespace CarSales.Demo.Api.Test.UnitTest
     {
         Mock<ICarService> moqCarService;
         Vehicle carObject;
-        String SUCCESS;
+        int SUCCESS;
         private bool disposedValue;
 
         public DbServiceTest()
@@ -34,31 +34,16 @@ namespace CarSales.Demo.Api.Test.UnitTest
         public void AddVehicle_adds_vehicle_of_the_specific_type()
         {
             //given
-            SUCCESS = "SUCCESS";
-            moqCarService.Setup(m => m.AddVehicle(It.IsAny<Vehicle>())).Returns(Task.FromResult<string>(SUCCESS));
-            var sut = new DbService(moqCarService.Object);
+            SUCCESS = 1;
+            moqCarService.Setup(m => m.AddVehicle(It.IsAny<Vehicle>())).Returns(Task.FromResult<int>(SUCCESS));
+            var sut = new VehicleTableService(moqCarService.Object);
 
             //when
             var result = sut.AddVehicle(carObject);
 
             //then
             Assert.IsAssignableFrom<String>(result.Result);
-            Assert.Same(SUCCESS, result.Result);
-        }
-        [Fact]
-        public void UpdateVehicle_updates_vehicle_of_the_specific_type()
-        {
-            //given
-            SUCCESS = "SUCCESS";
-            moqCarService.Setup(m => m.UpdateVehicle(It.IsAny<Vehicle>())).Returns(Task.FromResult<string>(SUCCESS));
-            var sut = new DbService(moqCarService.Object);
-
-            //when
-            var result = sut.UpdateVehicle(carObject);
-
-            //then
-            Assert.IsAssignableFrom<String>(result.Result);
-            Assert.Same(SUCCESS, result.Result);
+            Assert.Equal(SUCCESS, result.Result);
         }
 
         [Fact]
@@ -66,29 +51,13 @@ namespace CarSales.Demo.Api.Test.UnitTest
         {
             //given
             moqCarService.Setup(m => m.ViewAllVehicle()).Returns(Task.FromResult<IEnumerable<Vehicle>>(new List<Vehicle>()));
-            var sut = new DbService(moqCarService.Object);
+            var sut = new VehicleTableService(moqCarService.Object);
 
             //when
             var result = sut.GetAllVehicles();
 
             //then
             Assert.IsAssignableFrom<IEnumerable<Vehicle>>(result.Result);
-        }
-
-        [Fact]
-        public void GetSpecificVehicle_returns_specific_vehicle()
-        {
-            //given
-            SUCCESS = "SUCCESS";
-            moqCarService.Setup(m => m.GetSpecificVehicle(It.IsAny<int>())).Returns(Task.FromResult<Vehicle>(new Car()));
-            var sut = new DbService(moqCarService.Object);
-
-            //when
-            var result = sut.GetSpecificVehicle(VehicleType.CAR, 1);
-
-            //then
-            Assert.IsAssignableFrom<Vehicle>(result.Result);
-
         }
 
         protected virtual void Dispose(bool disposing)
