@@ -1,9 +1,7 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
-import {Vehicle, Car} from '../shared/model/vehicle.model';
+import {Vehicle} from '../shared/model/vehicle.model';
 import { VehicleService } from '../shared/services/vehicle.service';
 import { Subscription } from 'rxjs';
-import { timeout } from 'q';
-
 
 @Component({
   selector: 'app-vehiclelist',
@@ -15,7 +13,6 @@ export class VehiclelistComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   public Loading = false;
   constructor(private vehicleService: VehicleService) {
-
    }
 
   ngOnInit() {

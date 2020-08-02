@@ -25,7 +25,7 @@ namespace CarSales.Demo.Api.Controllers
         [ProducesResponseType(200, Type = typeof(List<string>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<string>> GetVehicleTypes()
         {
             IEnumerable<string> vehicleTypes;
 
@@ -119,62 +119,6 @@ namespace CarSales.Demo.Api.Controllers
             }
 
             return Ok(vehicleAddmessage);
-        }
-
-        /// <summary>
-        /// Get a vehicle with details
-        /// </summary>
-        /// <param name="vehicletype"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet("{vehicletype}/{Id}")]
-        [ProducesResponseType(200, Type = typeof(string))]
-        [ProducesResponseType(400)]
-        public async Task<ActionResult<Vehicle>> GetSpecificVehicle(string vehicletype, int id)
-        {
-            if (string.IsNullOrWhiteSpace(vehicletype) || !ModelState.IsValid) return BadRequest(ModelState);
-
-            Vehicle specificvehicle;
-            try
-            {
-                specificvehicle = await _vehicleService.GetSpecificVehicle(vehicletype, id);
-                if (specificvehicle == null)
-                    return NotFound();
-            }
-            catch (AggregateException)
-            {
-                return BadRequest();//shout/catch/throw/log
-            }
-
-            return Ok(specificvehicle);
-
-        }
-
-        /// <summary>
-        /// Update the vehicle detail
-        /// </summary>
-        /// <param name="vehicle"></param>
-        /// <returns></returns>
-        [HttpPut("Update")]
-        [ProducesResponseType(200, Type = typeof(string))]
-        [ProducesResponseType(400)]
-        public async Task<ActionResult<string>> UpdateVehicle([FromBody]JObject vehicle)
-        {
-            if (vehicle == null || !ModelState.IsValid) return BadRequest(ModelState);
-
-            string updatedMessage;
-
-            try
-            {
-                updatedMessage = await _vehicleService.UpdateVehicle(vehicle);
-            }
-            catch (AggregateException)
-            {
-                return BadRequest();//shout/catch/throw/log
-            }
-
-            return Ok(updatedMessage);
-
         }
     }
 }

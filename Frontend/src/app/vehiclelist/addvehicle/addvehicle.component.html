@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
         <div class="row">
-            <h3>Please fill below form to add a {{requestedvehicletype}}</h3>
+            <h3>Add {{requestedvehicletype}}</h3>
         </div>
         <form *ngIf='vehicleProps' novalidate (ngSubmit)='onSubmit(form.value)' [formGroup]="form">
           <div *ngFor="let prop of vehicleProps let i = index">
@@ -23,7 +23,7 @@
                           Please enter a valid data
                         </span>
                         <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Add {{requestedvehicletype}}</button>
-                        <button class="btn btn-primary" type="button" style="margin-left: 5px" (click)='cancel()'>Cancel</button>
+                        <button class="btn" type="button" style="margin-left: 5px" (click)='cancel()'>Cancel</button>
         </form>
     </div>
   </div>
