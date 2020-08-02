@@ -1,5 +1,5 @@
-﻿using CarSales.Demo.Api.Model;
-using Newtonsoft.Json;
+﻿using CarSales.Demo.Api.Domain.Model;
+using CarSales.Demo.Api.Model;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -14,15 +14,13 @@ namespace CarSales.Demo.Api.Domain
 
         Task<IEnumerable<Vehicle>> GetAllVehicles();
     }
-    class VehicleTableService : IVehicleTableService
+    partial class VehicleTableService : IVehicleTableService
     {
-        readonly Dictionary<VehicleType, Func<JObject, Vehicle>> dict = new Dictionary<VehicleType, Func<JObject, Vehicle>>();
 
-        readonly Dictionary<VehicleType, IVehicleDbServiceBase> vehicleTable = new Dictionary<VehicleType, IVehicleDbServiceBase>();
+        Dictionary<VehicleType, VehicleMapping> vehicleTable = new Dictionary<VehicleType, VehicleMapping>();
         public VehicleTableService(ICarDbService carService)
         {
-            vehicleTable.Add(VehicleType.CAR, carService);
-            dict.Add(VehicleType.CAR, carService.Get<Car>);
+            vehicleTable.Add(VehicleType.CAR, new VehicleMapping(carService, carService.Get<Car> ));
         }
         public async Task<int> AddVehicle(JObject vehicleObj)
         {
@@ -33,8 +31,8 @@ namespace CarSales.Demo.Api.Domain
                 {
                     if (Enum.TryParse(vehicleType.ToString(), true, out VehicleType enumName))
                     {
-                        var vehicle = dict[enumName].Invoke(vehicleObj);
-                        result= await vehicleTable[vehicle.VehicleType].AddVehicle(vehicle);
+                        var vehicle = vehicleTable[enumName].Func.Invoke(vehicleObj);
+                        result= await vehicleTable[vehicle.VehicleType].VehicleDbServiceBase.AddVehicle(vehicle);
                     }
                 }
                 return result;
@@ -53,7 +51,7 @@ namespace CarSales.Demo.Api.Domain
 
                 foreach (var vehicleType in vehicleTypes)
                 {
-                    vehicles.AddRange(await vehicleTable[vehicleType].ViewAllVehicle());
+                    vehicles.AddRange(await vehicleTable[vehicleType].VehicleDbServiceBase.ViewAllVehicle());
                 }
                 return vehicles;
             }

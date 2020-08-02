@@ -13,7 +13,7 @@ namespace CarSales.Demo.Api.Domain
         Vehicle GetVehicleType(VehicleType vehicleType);
 
     }
-    class VehicleDetailService : IVehicleDetailService
+    partial class VehicleDetailService : IVehicleDetailService
     {
         Dictionary<VehicleType, Vehicle> vehicleDictionary = new Dictionary<VehicleType, Vehicle>();
         public VehicleDetailService()
