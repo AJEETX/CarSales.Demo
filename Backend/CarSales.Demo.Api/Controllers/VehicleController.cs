@@ -83,7 +83,7 @@ namespace CarSales.Demo.Api.Controllers
         [ProducesResponseType(200, Type = typeof(List<Vehicle>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public ActionResult<List<Vehicle>> GetAllVehicles()
+        public IActionResult GetAllVehicles()
         {
             IEnumerable<Vehicle> vehicles;
             try
@@ -108,7 +108,7 @@ namespace CarSales.Demo.Api.Controllers
         [ProducesResponseType(200, Type = typeof(string))]
         [ProducesResponseType(400)]
         [SwaggerRequestExample(typeof(JObject), typeof(VehiclRequestExample))]
-        public async Task<ActionResult<string>> AddVehicle([FromBody]JObject jObject)
+        public async Task<IActionResult> AddVehicle([FromBody]JObject jObject)
         {
             if (jObject == null || !ModelState.IsValid) return BadRequest(ModelState);
 
