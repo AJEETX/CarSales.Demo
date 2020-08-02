@@ -1,10 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using CarSales.Demo.Api.Model;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace CarSales.Demo.Api.Model
 {
-    public class Car : Vehicle
+    public class Boat : Vehicle
     {
         [Required]
         [RegularExpression(@"^[0-9]{1}$")]
@@ -15,12 +16,9 @@ namespace CarSales.Demo.Api.Model
 
         [Required]
         [RegularExpression(@"^[0-9]{1}$")]
-        public int Wheels { get; set; }
-
-        [Required]
-        public string BodyType { get; set; }
+        public int Floors { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public override VehicleType VehicleType => VehicleType.CAR;
+        public override VehicleType VehicleType => VehicleType.BOAT;
     }
 }

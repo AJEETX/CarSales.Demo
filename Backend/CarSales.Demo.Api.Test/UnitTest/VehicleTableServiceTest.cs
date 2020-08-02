@@ -1,5 +1,6 @@
 ﻿using CarSales.Demo.Api.Domain.Service;
 using CarSales.Demo.Api.Model;
+using CarSales.Demo.Api.Test.Setup;
 using Moq;
 using Newtonsoft.Json.Linq;
 using System;
@@ -13,7 +14,6 @@ namespace CarSales.Demo.Api.Test.UnitTest
     {
         Mock<ICarDbService> moqCarDbService;
         Mock<IBoatDbService> moqBoatDbService;
-        dynamic carObject;
         int SUCCESS;
         private bool disposedValue;
 
@@ -21,15 +21,6 @@ namespace CarSales.Demo.Api.Test.UnitTest
         {
             moqCarDbService = new Mock<ICarDbService>();
             moqBoatDbService = new Mock<IBoatDbService>();
-            carObject = new JObject();
-            carObject.VehicleType = "CAR";
-            carObject.Make = "JEEP";
-            carObject.Id = 1;
-            carObject.Model = "Grand Cherokee";
-            carObject.Doors = 5;
-            carObject.Wheels = 6;
-            carObject.BodyType = "SUV";
-            carObject.Engine = "1000CC";
         }
 
         [Fact]
@@ -37,17 +28,18 @@ namespace CarSales.Demo.Api.Test.UnitTest
         {
             //given
             SUCCESS = 1;
-            moqCarDbService.Setup(m => m.Get<Car>(It.IsAny<JObject>())).Returns(new Car());
+            JObject input = TestData.AnotherSampleObject();
+            moqCarDbService.Setup(m => m.Cast2Vehicle<Car>(It.IsAny<JObject>())).Returns(new Car());
             moqCarDbService.Setup(m => m.AddVehicle(It.IsAny<Vehicle>())).ReturnsAsync(SUCCESS);
             var sut = new VehicleTableService(moqCarDbService.Object, moqBoatDbService.Object);
 
             //when
-            var result =await sut.AddVehicle(carObject);
+            var result =await sut.AddVehicle(input);
 
             //then
             Assert.IsAssignableFrom<int>(result);
             Assert.Equal(SUCCESS, result);
-            moqCarDbService.Verify(v => v.Get<Car>(It.IsAny<JObject>()), Times.Exactly(1));
+            moqCarDbService.Verify(v => v.Cast2Vehicle<Car>(It.IsAny<JObject>()), Times.Exactly(1));
             moqCarDbService.Verify(v => v.AddVehicle(It.IsAny<Vehicle>()), Times.Exactly(1));
         }
 
@@ -55,7 +47,7 @@ namespace CarSales.Demo.Api.Test.UnitTest
         public void GetAllVehicles_returns_all_vehicles()
         {
             //given
-            moqCarDbService.Setup(m => m.ViewAllVehicle()).Returns(new List<Vehicle>());
+            moqCarDbService.Setup(m => m.GetAllVehicle()).Returns(new List<Vehicle>());
             var sut = new VehicleTableService(moqCarDbService.Object,moqBoatDbService.Object);
 
             //when
@@ -63,7 +55,7 @@ namespace CarSales.Demo.Api.Test.UnitTest
 
             //then
             Assert.IsAssignableFrom<IEnumerable<Vehicle>>(result);
-            moqCarDbService.Verify(v => v.ViewAllVehicle(), Times.Exactly(1));
+            moqCarDbService.Verify(v => v.GetAllVehicle(), Times.Exactly(1));
         }
 
         protected virtual void Dispose(bool disposing)
@@ -73,7 +65,6 @@ namespace CarSales.Demo.Api.Test.UnitTest
                 if (disposing)
                 {
                     moqCarDbService = null;
-                    carObject = null;
                 }
                 disposedValue = true;
             }

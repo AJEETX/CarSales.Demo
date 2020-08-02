@@ -3,11 +3,8 @@ using CarSales.Demo.Api.Domain.Service;
 using CarSales.Demo.Api.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace CarSales.Demo.Api.Domain.Extension
+namespace CarSales.Demo.Api.Domain.Helper
 {
     public static class Extension
     {
@@ -25,5 +22,4 @@ namespace CarSales.Demo.Api.Domain.Extension
             return services;
         }
     }
-
 }

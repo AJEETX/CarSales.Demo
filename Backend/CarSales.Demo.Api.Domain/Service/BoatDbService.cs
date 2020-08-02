@@ -18,18 +18,20 @@ namespace CarSales.Demo.Api.Domain.Service
             _transactionManager = transactionManager;
         }
 
-        public override IEnumerable<Vehicle> ViewAllVehicle()
+        public override IEnumerable<Vehicle> GetAllVehicle()
         {
+            IEnumerable<Vehicle> vehicles = null;
             try
             {
-                return _transactionManager.CreateRepository<Boat>().Get();
+                vehicles= _transactionManager.CreateRepository<Boat>().Get();
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);//log
+                //log
             }
+            return vehicles;
         }
-        public override Boat Get<Boat>(JObject vehicleObj)
+        public override Boat Cast2Vehicle<Boat>(JObject vehicleObj)
         {
             return JsonConvert.DeserializeObject<Boat>(vehicleObj.ToString());
         }

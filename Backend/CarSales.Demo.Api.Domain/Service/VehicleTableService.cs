@@ -20,8 +20,8 @@ namespace CarSales.Demo.Api.Domain.Service
         Dictionary<VehicleType, VehicleMapping> vehicleTable = new Dictionary<VehicleType, VehicleMapping>();
         public VehicleTableService(ICarDbService carService, IBoatDbService boatDbService)
         {
-            vehicleTable.Add(VehicleType.CAR, new VehicleMapping(carService, carService.Get<Car> ));
-            vehicleTable.Add(VehicleType.BOAT, new VehicleMapping(boatDbService, boatDbService.Get<Boat>));
+            vehicleTable.Add(VehicleType.CAR, new VehicleMapping(carService, carService.Cast2Vehicle<Car> ));
+            vehicleTable.Add(VehicleType.BOAT, new VehicleMapping(boatDbService, boatDbService.Cast2Vehicle<Boat>));
         }
         public async Task<int> AddVehicle(JObject vehicleObj)
         {
@@ -52,7 +52,7 @@ namespace CarSales.Demo.Api.Domain.Service
 
                 foreach (var vehicleType in vehicleTypes)
                 {
-                    vehicles.AddRange(vehicleTable[vehicleType].VehicleDbServiceBase.ViewAllVehicle());
+                    vehicles.AddRange(vehicleTable[vehicleType].VehicleDbServiceBase.GetAllVehicle());
                 }
                 return vehicles;
             }

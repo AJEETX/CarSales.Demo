@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CarSales.Demo.Api.Domain;
+using CarSales.Demo.Api.Domain.Helper;
 using CarSales.Demo.Api.Domain.Service;
 using CarSales.Demo.Api.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -105,8 +106,8 @@ namespace CarSales.Demo.Api.Controllers
         /// <returns></returns>
         [HttpPost("Add")]
         [ProducesResponseType(200, Type = typeof(string))]
-        [SwaggerRequestExample(typeof(Car), typeof(VehiclRequestExample))]
         [ProducesResponseType(400)]
+        [SwaggerRequestExample(typeof(JObject), typeof(VehiclRequestExample))]
         public async Task<ActionResult<string>> AddVehicle([FromBody]JObject vehicle)
         {
             if (vehicle == null || !ModelState.IsValid) return BadRequest(ModelState);

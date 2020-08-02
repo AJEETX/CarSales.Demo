@@ -16,10 +16,10 @@ namespace CarSales.Demo.Api.Test.UnitTest
             var sut = new VehicleDetailService();
 
             //when
-            var result =await sut.GetVehicleProperties(VehicleType.CAR);
+            var actualResult = await sut.GetVehicleProperties(VehicleType.CAR);
 
             //
-            Assert.IsAssignableFrom<IEnumerable<VehicleDetail>>(result);
+            Assert.IsAssignableFrom<IEnumerable<VehicleDetail>>(actualResult);
         }
 
         [Fact]
@@ -29,10 +29,10 @@ namespace CarSales.Demo.Api.Test.UnitTest
             var sut = new VehicleDetailService();
 
             //when
-            var result = sut.GetVehicleType(VehicleType.CAR);
+            var actualResult = sut.GetVehicleType(VehicleType.CAR);
 
             //
-            Assert.IsAssignableFrom<Car>(result);
+            Assert.IsAssignableFrom<Car>(actualResult);
         }
     }
 }

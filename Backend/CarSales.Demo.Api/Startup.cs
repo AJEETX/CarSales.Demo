@@ -5,9 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
-using CarSales.Demo.Api.Domain.Extension;
 using Swashbuckle.AspNetCore.Examples;
-using CarSales.Demo.Api.Model;
+using CarSales.Demo.Api.Domain.Helper;
 
 namespace CarSales.Demo.Api
 {
@@ -43,22 +42,6 @@ namespace CarSales.Demo.Api
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "CarSales Demo Api");
                     c.RoutePrefix = "";
                 });
-        }
-    }
-    class VehiclRequestExample : IExamplesProvider
-    {
-        public object GetExamples()
-        {
-            return new Car
-            {
-                 Id=1,
-                 BodyType="hatch",
-                  Doors=3,
-                   Engine="TestEngine",
-                    Make="TestMake",
-                     Model="TestModel",
-                      Wheels=4
-            };
         }
     }
 }

@@ -10,8 +10,8 @@ namespace CarSales.Demo.Api.Domain.Service
     public interface IVehicleDbServiceBase
     {
         Task<int> AddVehicle<T>(T vehicle) where T:class;
-        IEnumerable<Vehicle> ViewAllVehicle();
-        T Get<T>(JObject vehicleObj);
+        IEnumerable<Vehicle> GetAllVehicle();
+        T Cast2Vehicle<T>(JObject vehicleObj);
     }
     abstract class VehicleDbServiceBase : IVehicleDbServiceBase
     {
@@ -36,7 +36,7 @@ namespace CarSales.Demo.Api.Domain.Service
             return result;
         }
 
-        public abstract T Get<T>(JObject vehicleObj);
-        public abstract IEnumerable<Vehicle> ViewAllVehicle();
+        public abstract T Cast2Vehicle<T>(JObject vehicleObj);
+        public abstract IEnumerable<Vehicle> GetAllVehicle();
     }
 }
