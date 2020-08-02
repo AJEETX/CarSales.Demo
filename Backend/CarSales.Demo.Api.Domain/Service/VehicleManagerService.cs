@@ -47,21 +47,19 @@ namespace CarSales.Demo.Api.Domain
         }
         public async Task<IEnumerable<VehicleDetail>> GetVehicleProperties(string vehicleType)
         {
-            VehicleType enumName;
+            IEnumerable<VehicleDetail> vehicleDetails = null;
             try
             {
-                if (Enum.TryParse(vehicleType, true, out enumName))
+                if (Enum.TryParse(vehicleType, true, out VehicleType enumName))
                 {
-                    var vTypes = await _vehicleDetailService.GetVehicleProperties(enumName);
-
-                    return vTypes;
+                    vehicleDetails = await _vehicleDetailService.GetVehicleProperties(enumName);
                 }
-                else return null;
             }
             catch(Exception ex)
             {
                 throw new Exception(ex.Message); //log
             }
+            return vehicleDetails;
         }
         public IEnumerable<string> GetVehicleTypes()
         {

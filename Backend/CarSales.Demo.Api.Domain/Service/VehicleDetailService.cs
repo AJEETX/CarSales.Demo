@@ -37,11 +37,12 @@ namespace CarSales.Demo.Api.Domain
         
         public Vehicle GetVehicleType(VehicleType vehicleType)
         {
-            if(Enum.IsDefined(typeof(VehicleType),vehicleType))
+            Vehicle vehicle = null;
+            if (Enum.IsDefined(typeof(VehicleType),vehicleType))
             {
-                return vehicleDictionary[vehicleType];
+                vehicle= vehicleDictionary[vehicleType];
             }
-            return null;
+            return vehicle;
         }
         private IEnumerable<VehicleDetail> GetProperties(VehicleType vehicleType)
         {

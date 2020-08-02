@@ -26,20 +26,18 @@ namespace CarSales.Demo.Api.Domain
         }
         public async Task<int> AddVehicle(JObject vehicleObj)
         {
+            int result = 0;
             try
             {
-                JToken vehicleType;
-                if (vehicleObj.TryGetValue("VehicleType", out vehicleType))
+                if (vehicleObj.TryGetValue("VehicleType", out JToken vehicleType))
                 {
-                    VehicleType enumName;
-
-                    if (Enum.TryParse(vehicleType.ToString(), true, out enumName))
+                    if (Enum.TryParse(vehicleType.ToString(), true, out VehicleType enumName))
                     {
                         var vehicle = dict[enumName].Invoke(vehicleObj);
-                        return await vehicleTable[vehicle.VehicleType].AddVehicle(vehicle);
+                        result= await vehicleTable[vehicle.VehicleType].AddVehicle(vehicle);
                     }
                 }
-                return 0;
+                return result;
             }
             catch (Exception e)
             {
