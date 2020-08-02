@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CarSales.Demo.Api.Domain;
+using CarSales.Demo.Api.Domain.Service;
 using CarSales.Demo.Api.Model;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -81,12 +82,12 @@ namespace CarSales.Demo.Api.Controllers
         [ProducesResponseType(200, Type = typeof(List<Vehicle>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<List<Vehicle>>> GetAllVehicles()
+        public ActionResult<List<Vehicle>> GetAllVehicles()
         {
             IEnumerable<Vehicle> vehicles;
             try
             {
-                vehicles = await _vehicleManagerService.GetAllVehicles();
+                vehicles =  _vehicleManagerService.GetAllVehicles();
                 if (vehicles == null) return NotFound();
             }
             catch (AggregateException)

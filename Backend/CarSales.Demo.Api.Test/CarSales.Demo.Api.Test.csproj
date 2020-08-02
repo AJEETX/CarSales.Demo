@@ -16,4 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CarSales.Demo.Api\CarSales.Demo.Api.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Setup\" />
+  </ItemGroup>
 </Project>

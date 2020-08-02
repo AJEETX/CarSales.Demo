@@ -1,8 +1,7 @@
-﻿using CarSales.Demo.Api.Model;
+﻿using CarSales.Demo.Api.Domain.Service;
+using CarSales.Demo.Api.Model;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CarSales.Demo.Api.Domain.Model
 {

@@ -1,4 +1,4 @@
-﻿using CarSales.Demo.Api.Domain;
+﻿using CarSales.Demo.Api.Domain.Service;
 using CarSales.Demo.Api.Model;
 using Moq;
 using Newtonsoft.Json.Linq;
@@ -9,18 +9,17 @@ using Xunit;
 
 namespace CarSales.Demo.Api.Test.UnitTest
 {
-    public class VehicleServiceTest : IDisposable
+    public class VehicleManagerServiceTest : IDisposable
     {
         Mock<IVehicleDetailService> moqVehicleDetailService;
         Mock<IVehicleTableService> moqVehicleTableService;
         private bool disposedValue;
 
-        public VehicleServiceTest()
+        public VehicleManagerServiceTest()
         {
             moqVehicleDetailService = new Mock<IVehicleDetailService>();
             moqVehicleTableService = new Mock<IVehicleTableService>();
         }
-
 
         [Fact]
         public void GetVehicleTypes_returns_all_vehicles()
@@ -34,26 +33,26 @@ namespace CarSales.Demo.Api.Test.UnitTest
             //then
             Assert.IsAssignableFrom<IEnumerable<string>>(result);
         }
-
         [Fact]
-        public void GetVehicleProperties_returns_all_vehicles_properties()
+        public async Task GetVehicleProperties_returns_all_vehicles_properties()
         {
             //given
-            moqVehicleDetailService.Setup(m => m.GetVehicleProperties(It.IsAny<VehicleType>())).Returns(Task.FromResult<IEnumerable<VehicleDetail>>(new List<VehicleDetail>()));
+            moqVehicleDetailService.Setup(m => m.GetVehicleProperties(It.IsAny<VehicleType>())).ReturnsAsync(new List<VehicleDetail>());
             var sut = new VehicleManagerService(moqVehicleDetailService.Object, moqVehicleTableService.Object);
             
             //when
-            var result = sut.GetVehicleProperties("car");
+            var result = await sut.GetVehicleProperties("car");
             
             //then
-            Assert.IsAssignableFrom<IEnumerable<VehicleDetail>>(result.Result);
-
+            Assert.IsAssignableFrom<IEnumerable<VehicleDetail>>(result);
+            moqVehicleDetailService.Verify(v => v.GetVehicleProperties(It.IsAny<VehicleType>()), Times.Exactly(1));
         }
         [Fact]
-        public void AddVehicle_adds_the_vehicle_with_properties()
+        public async Task AddVehicle_adds_the_vehicle_with_properties()
         {
             //given
-            moqVehicleTableService.Setup(m => m.AddVehicle(It.IsAny<JObject>())).Returns(Task.FromResult<int>(1));
+            int expectedResult = 1;
+            moqVehicleTableService.Setup(m => m.AddVehicle(It.IsAny<JObject>())).ReturnsAsync(expectedResult);
 
             var sut = new VehicleManagerService(moqVehicleDetailService.Object, moqVehicleTableService.Object);
             JObject carObject = JObject.FromObject(new Car()
@@ -68,24 +67,26 @@ namespace CarSales.Demo.Api.Test.UnitTest
             });
 
             //when
-            var result = sut.AddVehicle(carObject);
+            var result =await sut.AddVehicle(carObject);
 
             //then
-            Assert.IsAssignableFrom<string>(result.Result);
+            Assert.IsAssignableFrom<int>(result);
+            Assert.Equal(expectedResult, result);
+            moqVehicleTableService.Verify(v => v.AddVehicle(It.IsAny<JObject>()), Times.Exactly(1));
         }
-
         [Fact]
         public void GetAllVehicles_returns_all_vehicles()
         {
             //given
-            moqVehicleTableService.Setup(m => m.GetAllVehicles()).Returns(Task.FromResult<IEnumerable<Vehicle>>(new List<Vehicle>()));
+            moqVehicleTableService.Setup(m => m.GetAllVehicles()).Returns(new List<Vehicle>());
             var sut = new VehicleManagerService(moqVehicleDetailService.Object, moqVehicleTableService.Object);
 
             //when
-            var result = sut.GetAllVehicles();
+            var result =sut.GetAllVehicles();
 
             //then
-            Assert.IsAssignableFrom<IEnumerable<Vehicle>>(result.Result);
+            Assert.IsAssignableFrom<IEnumerable<Vehicle>>(result);
+            moqVehicleTableService.Verify(v => v.GetAllVehicles(), Times.Exactly(1));
         }
 
         protected virtual void Dispose(bool disposing)

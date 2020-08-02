@@ -2,17 +2,16 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace CarSales.Demo.Api.Domain
+namespace CarSales.Demo.Api.Domain.Service
 {
     public interface IVehicleManagerService
     {
         IEnumerable<string> GetVehicleTypes();
         Task<IEnumerable<VehicleDetail>> GetVehicleProperties(string vehicleType);
         Task<int> AddVehicle(JObject vehicleJObject);
-        Task<IEnumerable<Vehicle>> GetAllVehicles();
+        IEnumerable<Vehicle> GetAllVehicles();
     }
     class VehicleManagerService : IVehicleManagerService
     {
@@ -23,22 +22,11 @@ namespace CarSales.Demo.Api.Domain
             _vehicleDetailService = vehicleDetailService;
             _vehicleTableService = vehicleTableService;
         }
-        public async Task<int> AddVehicle(JObject vehicleJObject)
+        public IEnumerable<string> GetVehicleTypes()
         {
             try
             {
-                return await _vehicleTableService.AddVehicle(vehicleJObject);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message); //log
-            }
-        }
-        public async Task<IEnumerable<Vehicle>> GetAllVehicles()
-        {
-            try
-            {
-                return await _vehicleTableService.GetAllVehicles();
+                return Enum.GetNames(typeof(VehicleType));
             }
             catch (Exception ex)
             {
@@ -61,11 +49,22 @@ namespace CarSales.Demo.Api.Domain
             }
             return vehicleDetails;
         }
-        public IEnumerable<string> GetVehicleTypes()
+        public async Task<int> AddVehicle(JObject vehicleJObject)
         {
             try
             {
-                return Enum.GetNames(typeof(VehicleType));
+                return await _vehicleTableService.AddVehicle(vehicleJObject);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message); //log
+            }
+        }
+        public IEnumerable<Vehicle> GetAllVehicles()
+        {
+            try
+            {
+                return _vehicleTableService.GetAllVehicles();
             }
             catch (Exception ex)
             {

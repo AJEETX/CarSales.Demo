@@ -1,6 +1,7 @@
-﻿using CarSales.Demo.Api.Domain;
+﻿using CarSales.Demo.Api.Domain.Service;
 using CarSales.Demo.Api.Model;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace CarSales.Demo.Api.Test.UnitTest
@@ -9,16 +10,16 @@ namespace CarSales.Demo.Api.Test.UnitTest
     {
 
         [Fact]
-        public void GetVehicleProperties_returns_all_vehicles_properties_with_help_of_dictionary()
+        public async Task GetVehicleProperties_returns_all_vehicles_properties_with_help_of_dictionary()
         {
             //given
             var sut = new VehicleDetailService();
 
             //when
-            var result = sut.GetVehicleProperties(VehicleType.CAR);
+            var result =await sut.GetVehicleProperties(VehicleType.CAR);
 
             //
-            Assert.IsAssignableFrom<IEnumerable<VehicleDetail>>(result.Result);
+            Assert.IsAssignableFrom<IEnumerable<VehicleDetail>>(result);
         }
 
         [Fact]

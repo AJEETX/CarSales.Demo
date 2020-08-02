@@ -1,34 +1,33 @@
-﻿using CarSales.Demo.Api.Model;
-using CarSales.Demo.Api.Repository;
+﻿using CarSales.Demo.Api.Domain.Repository;
+using CarSales.Demo.Api.Model;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CarSales.Demo.Api.Domain
+namespace CarSales.Demo.Api.Domain.Service
 {
     public interface IVehicleDbServiceBase
     {
-        Task<int> AddVehicle(Vehicle vehicle);
-        Task<IEnumerable<Vehicle>> ViewAllVehicle();
+        Task<int> AddVehicle<T>(T vehicle) where T:class;
+        IEnumerable<Vehicle> ViewAllVehicle();
         T Get<T>(JObject vehicleObj);
     }
     abstract class VehicleDbServiceBase : IVehicleDbServiceBase
     {
-        readonly DataContext _context;
-        public VehicleDbServiceBase(DataContext context)
+        ITransactionManager _transactionManager;
+        public VehicleDbServiceBase(ITransactionManager transactionManager)
         {
-            _context = context;
+            _transactionManager = transactionManager;
         }
 
-        public async Task<int> AddVehicle(Vehicle vehicle)
+        public async Task<int> AddVehicle<T>(T vehicle) where T : class
         {
             int result = 0;
-            if (vehicle == null) return result;
             try
             {
-                _context.Add(vehicle);
-                result= await _context.SaveChangesAsync();
+                await _transactionManager.CreateRepository<T>().Add(vehicle);
+                result= await _transactionManager.SaveAsync();
             }
             catch (Exception e)
             {
@@ -38,6 +37,6 @@ namespace CarSales.Demo.Api.Domain
         }
 
         public abstract T Get<T>(JObject vehicleObj);
-        public abstract Task<IEnumerable<Vehicle>> ViewAllVehicle();
+        public abstract IEnumerable<Vehicle> ViewAllVehicle();
     }
 }

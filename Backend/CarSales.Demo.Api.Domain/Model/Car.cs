@@ -23,5 +23,21 @@ namespace CarSales.Demo.Api.Model
         [JsonConverter(typeof(StringEnumConverter))]
         public override VehicleType VehicleType => VehicleType.CAR;
     }
-    
+    public class Boat : Vehicle
+    {
+        [Required]
+        [RegularExpression(@"^[0-9]{1}$")]
+        public int Doors { get; set; }
+
+        [Required]
+        public string Engine { get; set; }
+
+        [Required]
+        [RegularExpression(@"^[0-9]{1}$")]
+        public int Floors { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public override VehicleType VehicleType => VehicleType.BOAT;
+    }
+
 }

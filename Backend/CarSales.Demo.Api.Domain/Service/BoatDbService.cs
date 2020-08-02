@@ -7,13 +7,13 @@ using System.Collections.Generic;
 
 namespace CarSales.Demo.Api.Domain.Service
 {
-    public interface ICarDbService : IVehicleDbServiceBase
+    public interface IBoatDbService : IVehicleDbServiceBase
     {
     }
-    class CarDbService : VehicleDbServiceBase, ICarDbService
+    class BoatDbService : VehicleDbServiceBase, IBoatDbService
     {
         ITransactionManager _transactionManager;
-        public CarDbService(ITransactionManager transactionManager) :base(transactionManager)
+        public BoatDbService(ITransactionManager transactionManager) : base(transactionManager)
         {
             _transactionManager = transactionManager;
         }
@@ -22,16 +22,16 @@ namespace CarSales.Demo.Api.Domain.Service
         {
             try
             {
-                return _transactionManager.CreateRepository<Car>().Get();
+                return _transactionManager.CreateRepository<Boat>().Get();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);//log
             }
         }
-        public override Car Get<Car>(JObject vehicleObj)
+        public override Boat Get<Boat>(JObject vehicleObj)
         {
-            return JsonConvert.DeserializeObject<Car>(vehicleObj.ToString());
+            return JsonConvert.DeserializeObject<Boat>(vehicleObj.ToString());
         }
     }
 }

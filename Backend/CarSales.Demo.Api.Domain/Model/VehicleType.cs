@@ -4,6 +4,6 @@ namespace CarSales.Demo.Api.Model
     {
         CAR = 0,
         // Add a new vehicle type
-        //BOAT=1        
+        BOAT = 1
     }
 }

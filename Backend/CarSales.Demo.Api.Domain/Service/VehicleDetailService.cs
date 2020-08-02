@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CarSales.Demo.Api.Domain
+namespace CarSales.Demo.Api.Domain.Service
 {
     public interface IVehicleDetailService
     {
@@ -18,6 +18,7 @@ namespace CarSales.Demo.Api.Domain
         public VehicleDetailService()
         {
             vehicleDictionary.Add(VehicleType.CAR, new Car());
+            vehicleDictionary.Add(VehicleType.BOAT, new Boat());
         }
         public async Task<IEnumerable<VehicleDetail>> GetVehicleProperties(VehicleType vehicleType)
         {

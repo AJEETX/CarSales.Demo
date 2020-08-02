@@ -6,21 +6,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CarSales.Demo.Api.Domain
+namespace CarSales.Demo.Api.Domain.Service
 {
     public interface IVehicleTableService
     {
         Task<int> AddVehicle(JObject vehicle);
 
-        Task<IEnumerable<Vehicle>> GetAllVehicles();
+        IEnumerable<Vehicle> GetAllVehicles();
     }
     partial class VehicleTableService : IVehicleTableService
     {
 
         Dictionary<VehicleType, VehicleMapping> vehicleTable = new Dictionary<VehicleType, VehicleMapping>();
-        public VehicleTableService(ICarDbService carService)
+        public VehicleTableService(ICarDbService carService, IBoatDbService boatDbService)
         {
             vehicleTable.Add(VehicleType.CAR, new VehicleMapping(carService, carService.Get<Car> ));
+            vehicleTable.Add(VehicleType.BOAT, new VehicleMapping(boatDbService, boatDbService.Get<Boat>));
         }
         public async Task<int> AddVehicle(JObject vehicleObj)
         {
@@ -42,7 +43,7 @@ namespace CarSales.Demo.Api.Domain
                 throw new Exception(e.Message);//log
             }
         }
-        public async Task<IEnumerable<Vehicle>> GetAllVehicles()
+        public IEnumerable<Vehicle> GetAllVehicles()
         {
             var vehicles = new List<Vehicle>();
             try
@@ -51,7 +52,7 @@ namespace CarSales.Demo.Api.Domain
 
                 foreach (var vehicleType in vehicleTypes)
                 {
-                    vehicles.AddRange(await vehicleTable[vehicleType].VehicleDbServiceBase.ViewAllVehicle());
+                    vehicles.AddRange(vehicleTable[vehicleType].VehicleDbServiceBase.ViewAllVehicle());
                 }
                 return vehicles;
             }
