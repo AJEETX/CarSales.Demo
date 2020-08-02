@@ -11,46 +11,44 @@ namespace CarSales.Demo.Api.Domain
     {
         IEnumerable<string> GetVehicleTypes();
         Task<IEnumerable<VehicleDetail>> GetVehicleProperties(string vehicleType);
-        Task<string> AddVehicle(JObject vehicleJObject);
+        Task<int> AddVehicle(JObject vehicleJObject);
         Task<IEnumerable<Vehicle>> GetAllVehicles();
     }
     class VehicleService : IVehicleService
     {
-        readonly IVehicleStrategyContext _vehicleStrategyContext;
-        readonly IDbService _dbService;
+        readonly IVehicleDetailService  _vehicleDetailService;
+        readonly IVehicleTableService _vehicleTableService;
         readonly IVehicleConverter _vehicleConverter;
-        public VehicleService(IVehicleStrategyContext vehicleStrategyContext, IDbService dbService, IVehicleConverter vehicleConverter)
+        public VehicleService(VehicleDetailService vehicleDetailService, IVehicleTableService vehicleTableService, IVehicleConverter vehicleConverter)
         {
-            _vehicleStrategyContext = vehicleStrategyContext;
-            _dbService = dbService;
+            _vehicleDetailService = vehicleDetailService;
+            _vehicleTableService = vehicleTableService;
             _vehicleConverter = vehicleConverter;
         }
-        public async Task<string> AddVehicle(JObject vehicleJObject)
+        public async Task<int> AddVehicle(JObject vehicleJObject)
         {
-
+            int result = 0;
             try
             {
                 var vehicle = _vehicleConverter.Convert(vehicleJObject);
 
-                if (vehicle != null)
-                    return await _dbService.AddVehicle(vehicle);
-
-                else return "Vehicle type not found";
+                if (vehicle != null) result= await _vehicleTableService.AddVehicle(vehicle);
             }
             catch (Exception e)
             {
-                return e.Message; //shout/catch/throw/log
+                throw new Exception(e.Message); //log
             }
+            return result;
         }
         public async Task<IEnumerable<Vehicle>> GetAllVehicles()
         {
             try
             {
-                return await _dbService.GetAllVehicles();
+                return await _vehicleTableService.GetAllVehicles();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null; //shout/catch/throw/log
+                throw new Exception(ex.Message); //log
             }
         }
         public async Task<IEnumerable<VehicleDetail>> GetVehicleProperties(string vehicleType)
@@ -60,15 +58,15 @@ namespace CarSales.Demo.Api.Domain
             {
                 if (Enum.TryParse(vehicleType, true, out enumName))
                 {
-                    var vTypes = await _vehicleStrategyContext.GetVehicleProperties(enumName);
+                    var vTypes = await _vehicleDetailService.GetVehicleProperties(enumName);
 
-                    return vTypes.OrderBy(a => a.Order);
+                    return vTypes;
                 }
                 else return null;
             }
-            catch
+            catch(Exception ex)
             {
-                return null; //shout/catch/throw/log
+                throw new Exception(ex.Message); //log
             }
         }
         public IEnumerable<string> GetVehicleTypes()

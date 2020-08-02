@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace CarSales.Demo.Api.Domain
 {
-    public interface IVehicleStrategyContext
+    public interface IVehicleDetailService
     {
         Task<IEnumerable<VehicleDetail>> GetVehicleProperties(VehicleType vehicleType);
         Vehicle GetVehicleType(VehicleType vehicleType);
 
     }
-    class VehicleStrategyContext : IVehicleStrategyContext
+    class VehicleDetailService : IVehicleDetailService
     {
         Dictionary<VehicleType, Vehicle> vehicleDictionary = new Dictionary<VehicleType, Vehicle>();
-        public VehicleStrategyContext()
+        public VehicleDetailService()
         {
             vehicleDictionary.Add(VehicleType.CAR, new Car());
         }
@@ -34,7 +34,16 @@ namespace CarSales.Demo.Api.Domain
             return vehicleProperties;
 
         }
-        IEnumerable<VehicleDetail> GetProperties(VehicleType vehicleType)
+        
+        public Vehicle GetVehicleType(VehicleType vehicleType)
+        {
+            if(Enum.IsDefined(typeof(VehicleType),vehicleType))
+            {
+                return vehicleDictionary[vehicleType];
+            }
+            return null;
+        }
+        private IEnumerable<VehicleDetail> GetProperties(VehicleType vehicleType)
         {
             var vehicle = vehicleDictionary[vehicleType];
 
@@ -45,16 +54,10 @@ namespace CarSales.Demo.Api.Domain
                     Value = string.Empty,
                     Name = prop.Name,
                     Datatype = prop.PropertyType.Name,
-                    Order = prop.GetCustomAttributes(typeof(DisplayAttribute), true).Any() ? ((DisplayAttribute)(prop.GetCustomAttributes(typeof(DisplayAttribute), true)[0])).Order : 0,
                     Required = prop.GetCustomAttributes(typeof(RequiredAttribute), true).Any() ? true : false,
                     Regex = prop.GetCustomAttributes(typeof(RegularExpressionAttribute), true).Any() ? ((RegularExpressionAttribute)(prop.GetCustomAttributes(typeof(RegularExpressionAttribute), true)[0])).Pattern : ""
                 };
             }
-        }
-        public Vehicle GetVehicleType(VehicleType vehicleType)
-        {
-            var vehicle = vehicleDictionary[vehicleType];
-            return vehicle;
         }
     }
 }

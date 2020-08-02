@@ -107,7 +107,7 @@ namespace CarSales.Demo.Api.Controllers
         {
             if (vehicle == null || !ModelState.IsValid) return BadRequest(ModelState);
 
-            string vehicleAddmessage;
+            int vehicleAddmessage;
 
             try
             {

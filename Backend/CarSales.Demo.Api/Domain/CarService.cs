@@ -7,71 +7,23 @@ using System.Threading.Tasks;
 namespace CarSales.Demo.Api.Domain
 {
     public interface ICarService : IVehicleServiceBase { }
-    class CarService : ICarService
+    class CarService : VehicleServiceBase, ICarService
     {
         readonly DataContext _context;
-        public CarService(DataContext context)
+        public CarService(DataContext context):base(context)
         {
             _context = context;
         }
 
-        public async Task<string> AddVehicle(Vehicle vehicle)
-        {
-            if (vehicle == null) return null;
-            try
-            {
-                _context.Add(vehicle);
-                await _context.SaveChangesAsync();
-                return "Success";
-            }
-            catch (Exception e)
-            {
-                return e.Message;//shout/catch/throw/log
-            }
-        }
-        public async Task<Vehicle> GetSpecificVehicle(int Id)
-        {
-            Vehicle targetVehicle = null;
-            try
-            {
-                targetVehicle = await _context.Cars.FindAsync(Id);
-                if (targetVehicle == null)
-                    return new Car();
-            }
-            catch (Exception)
-            {
-                //shout/catch/throw/log
-            }
-            return targetVehicle;
-        }
-        public async Task<string> UpdateVehicle(Vehicle vehicle)
-        {
-            if (vehicle == null) return null;
-            try
-            {
-                var targetItem = _context.Cars.Find(vehicle.Id);
-                Car car = vehicle as Car;
-                if (targetItem == null)
-                    return "Item not found";
-
-                _context.Entry(targetItem).CurrentValues.SetValues(car);
-                await _context.SaveChangesAsync();
-                return "Success";
-            }
-            catch (Exception e)
-            {
-                return e.Message;//shout/catch/throw/log
-            }
-        }
-        public async Task<IEnumerable<Vehicle>> ViewAllVehicle()
+        public override async Task<IEnumerable<Vehicle>> ViewAllVehicle()
         {
             try
             {
                 return await Task.Run(() => _context.Cars);
             }
-            catch
+            catch(Exception ex)
             {
-                return null;//shout/catch/throw/log
+                throw new Exception(ex.Message);//shout/catch/throw/log
             }
         }
     }

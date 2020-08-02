@@ -6,30 +6,28 @@ using System.Threading.Tasks;
 
 namespace CarSales.Demo.Api.Domain
 {
-    public interface IDbService
+    public interface IVehicleTableService
     {
-        Task<string> AddVehicle(Vehicle vehicle);
+        Task<int> AddVehicle(Vehicle vehicle);
 
         Task<IEnumerable<Vehicle>> GetAllVehicles();
     }
-    class DbService : IDbService
+    class VehicleTableService : IVehicleTableService
     {
-        readonly ICarService _carService;
-        readonly Dictionary<VehicleType, IVehicleServiceBase> dict = new Dictionary<VehicleType, IVehicleServiceBase>();
-        public DbService(ICarService carService)
+        readonly Dictionary<VehicleType, IVehicleServiceBase> vehicleTable = new Dictionary<VehicleType, IVehicleServiceBase>();
+        public VehicleTableService(ICarService carService)
         {
-            _carService = carService;
-            dict.Add(VehicleType.CAR, _carService);
+            vehicleTable.Add(VehicleType.CAR, carService);
         }
-        public async Task<string> AddVehicle(Vehicle vehicle)
+        public async Task<int> AddVehicle(Vehicle vehicle)
         {
             try
             {
-                return await dict[vehicle.VehicleType].AddVehicle(vehicle);
+                return await vehicleTable[vehicle.VehicleType].AddVehicle(vehicle);
             }
             catch (Exception e)
             {
-                return e.Message;
+                throw new Exception(e.Message);
             }
         }
         public async Task<IEnumerable<Vehicle>> GetAllVehicles()
@@ -40,12 +38,12 @@ namespace CarSales.Demo.Api.Domain
 
                 return await GetAll(vehicleTypes);
             }
-            catch
+            catch(Exception ex)
             {
-                return null;
+                throw new Exception(ex.Message);//log
             }
         }
-        async Task<IEnumerable<Vehicle>> GetAll(IEnumerable<VehicleType> vehicleTypes)
+        private async Task<IEnumerable<Vehicle>> GetAll(IEnumerable<VehicleType> vehicleTypes)
         {
             try
             {
@@ -53,14 +51,13 @@ namespace CarSales.Demo.Api.Domain
 
                 foreach (var vehicleType in vehicleTypes)
                 {
-
-                    vehicles.AddRange(await dict[vehicleType].ViewAllVehicle());
+                    vehicles.AddRange(await vehicleTable[vehicleType].ViewAllVehicle());
                 }
                 return vehicles;
             }
-            catch
+            catch(Exception ex)
             {
-                return null;
+                throw new Exception(ex.Message); //log
             }
         }
     }

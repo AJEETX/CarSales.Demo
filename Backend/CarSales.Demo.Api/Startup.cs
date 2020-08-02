@@ -28,10 +28,10 @@ public class Startup
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<DataContext>(db => db.UseInMemoryDatabase("CarSalesDb"));
             services.AddScoped<IVehicleService, VehicleService>();
-            services.AddScoped<IDbService, DbService>();
+            services.AddScoped<IVehicleTableService, VehicleTableService>();
             services.AddScoped<ICarService, CarService>();
             services.AddScoped<IVehicleConverter, VehicleConverter>();
-            services.AddScoped<IVehicleStrategyContext, VehicleStrategyContext>();
+            services.AddScoped<IVehicleDetailService, VehicleDetailService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
