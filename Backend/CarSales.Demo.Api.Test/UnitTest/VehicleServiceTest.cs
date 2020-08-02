@@ -13,14 +13,12 @@ namespace CarSales.Demo.Api.Test.UnitTest
     {
         Mock<IVehicleDetailService> moqVehicleDetailService;
         Mock<IVehicleTableService> moqVehicleTableService;
-        Mock<IVehicleConverter> moqVehicleConverter;
         private bool disposedValue;
 
         public VehicleServiceTest()
         {
             moqVehicleDetailService = new Mock<IVehicleDetailService>();
             moqVehicleTableService = new Mock<IVehicleTableService>();
-            moqVehicleConverter = new Mock<IVehicleConverter>();
         }
 
 
@@ -28,7 +26,7 @@ namespace CarSales.Demo.Api.Test.UnitTest
         public void GetVehicleTypes_returns_all_vehicles()
         {
             //given
-            var sut = new VehicleService(moqVehicleDetailService.Object, moqVehicleTableService.Object, moqVehicleConverter.Object);
+            var sut = new VehicleManagerService(moqVehicleDetailService.Object, moqVehicleTableService.Object);
             
             //when
             var result = sut.GetVehicleTypes();
@@ -42,7 +40,7 @@ namespace CarSales.Demo.Api.Test.UnitTest
         {
             //given
             moqVehicleDetailService.Setup(m => m.GetVehicleProperties(It.IsAny<VehicleType>())).Returns(Task.FromResult<IEnumerable<VehicleDetail>>(new List<VehicleDetail>()));
-            var sut = new VehicleService(moqVehicleDetailService.Object, moqVehicleTableService.Object, moqVehicleConverter.Object);
+            var sut = new VehicleManagerService(moqVehicleDetailService.Object, moqVehicleTableService.Object);
             
             //when
             var result = sut.GetVehicleProperties("car");
@@ -55,10 +53,9 @@ namespace CarSales.Demo.Api.Test.UnitTest
         public void AddVehicle_adds_the_vehicle_with_properties()
         {
             //given
-            moqVehicleConverter.Setup(m => m.Convert(It.IsAny<JObject>())).Returns(new Car());
-            moqVehicleTableService.Setup(m => m.AddVehicle(It.IsAny<Vehicle>())).Returns(Task.FromResult<int>(1));
+            moqVehicleTableService.Setup(m => m.AddVehicle(It.IsAny<JObject>())).Returns(Task.FromResult<int>(1));
 
-            var sut = new VehicleService(moqVehicleDetailService.Object, moqVehicleTableService.Object, moqVehicleConverter.Object);
+            var sut = new VehicleManagerService(moqVehicleDetailService.Object, moqVehicleTableService.Object);
             JObject carObject = JObject.FromObject(new Car()
             {
                 Make = "JEEP",
@@ -82,7 +79,7 @@ namespace CarSales.Demo.Api.Test.UnitTest
         {
             //given
             moqVehicleTableService.Setup(m => m.GetAllVehicles()).Returns(Task.FromResult<IEnumerable<Vehicle>>(new List<Vehicle>()));
-            var sut = new VehicleService(moqVehicleDetailService.Object, moqVehicleTableService.Object, moqVehicleConverter.Object);
+            var sut = new VehicleManagerService(moqVehicleDetailService.Object, moqVehicleTableService.Object);
 
             //when
             var result = sut.GetAllVehicles();
@@ -99,8 +96,6 @@ namespace CarSales.Demo.Api.Test.UnitTest
                 {
                     moqVehicleDetailService = null;
                     moqVehicleTableService = null;
-                    moqVehicleConverter = null;
-                    moqVehicleConverter = null;
                 }
 
                 disposedValue = true;

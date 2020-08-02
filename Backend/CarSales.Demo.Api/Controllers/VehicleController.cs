@@ -13,10 +13,10 @@ namespace CarSales.Demo.Api.Controllers
     [ApiController]
     public class VehicleController : ControllerBase
     {
-        readonly IVehicleService _vehicleService;
-        public VehicleController(IVehicleService vehicleService)
+        readonly IVehicleManagerService _vehicleManagerService;
+        public VehicleController(IVehicleManagerService vehicleManagerService)
         {
-            _vehicleService = vehicleService;
+            _vehicleManagerService = vehicleManagerService;
         }
         /// <summary>
         /// Retrieve all the Vehicle types.
@@ -31,7 +31,7 @@ namespace CarSales.Demo.Api.Controllers
 
             try
             {
-                vehicleTypes = _vehicleService.GetVehicleTypes();
+                vehicleTypes = _vehicleManagerService.GetVehicleTypes();
 
                 if (vehicleTypes == null) return NotFound();
             }
@@ -60,7 +60,7 @@ namespace CarSales.Demo.Api.Controllers
             IEnumerable<VehicleDetail> vehicleProperties;
             try
             {
-                vehicleProperties = await _vehicleService.GetVehicleProperties(type);
+                vehicleProperties = await _vehicleManagerService.GetVehicleProperties(type);
                 if (vehicleProperties == null) return NotFound();
             }
             catch (AggregateException)
@@ -84,7 +84,7 @@ namespace CarSales.Demo.Api.Controllers
             IEnumerable<Vehicle> vehicles;
             try
             {
-                vehicles = await _vehicleService.GetAllVehicles();
+                vehicles = await _vehicleManagerService.GetAllVehicles();
                 if (vehicles == null) return NotFound();
             }
             catch (AggregateException)
@@ -111,7 +111,7 @@ namespace CarSales.Demo.Api.Controllers
 
             try
             {
-                vehicleAddmessage = await _vehicleService.AddVehicle(vehicle);
+                vehicleAddmessage = await _vehicleManagerService.AddVehicle(vehicle);
             }
             catch (AggregateException)
             {

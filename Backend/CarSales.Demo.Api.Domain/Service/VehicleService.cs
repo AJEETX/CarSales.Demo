@@ -7,38 +7,32 @@ using System.Threading.Tasks;
 
 namespace CarSales.Demo.Api.Domain
 {
-    public interface IVehicleService
+    public interface IVehicleManagerService
     {
         IEnumerable<string> GetVehicleTypes();
         Task<IEnumerable<VehicleDetail>> GetVehicleProperties(string vehicleType);
         Task<int> AddVehicle(JObject vehicleJObject);
         Task<IEnumerable<Vehicle>> GetAllVehicles();
     }
-    class VehicleService : IVehicleService
+    class VehicleManagerService : IVehicleManagerService
     {
         readonly IVehicleDetailService  _vehicleDetailService;
         readonly IVehicleTableService _vehicleTableService;
-        readonly IVehicleConverter _vehicleConverter;
-        public VehicleService(IVehicleDetailService vehicleDetailService, IVehicleTableService vehicleTableService, IVehicleConverter vehicleConverter)
+        public VehicleManagerService(IVehicleDetailService vehicleDetailService, IVehicleTableService vehicleTableService)
         {
             _vehicleDetailService = vehicleDetailService;
             _vehicleTableService = vehicleTableService;
-            _vehicleConverter = vehicleConverter;
         }
         public async Task<int> AddVehicle(JObject vehicleJObject)
         {
-            int result = 0;
             try
             {
-                var vehicle = _vehicleConverter.Convert(vehicleJObject);
-
-                if (vehicle != null) result= await _vehicleTableService.AddVehicle(vehicle);
+                return await _vehicleTableService.AddVehicle(vehicleJObject);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message); //log
             }
-            return result;
         }
         public async Task<IEnumerable<Vehicle>> GetAllVehicles()
         {
@@ -75,9 +69,9 @@ namespace CarSales.Demo.Api.Domain
             {
                 return Enum.GetNames(typeof(VehicleType));
             }
-            catch
+            catch (Exception ex)
             {
-                return Enumerable.Empty<string>();//shout/catch/throw/log
+                throw new Exception(ex.Message); //log
             }
         }
     }

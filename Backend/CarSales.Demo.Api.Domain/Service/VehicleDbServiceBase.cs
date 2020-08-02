@@ -1,20 +1,22 @@
 ﻿using CarSales.Demo.Api.Model;
 using CarSales.Demo.Api.Repository;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CarSales.Demo.Api.Domain
 {
-    public interface IVehicleServiceBase
+    public interface IVehicleDbServiceBase
     {
         Task<int> AddVehicle(Vehicle vehicle);
         Task<IEnumerable<Vehicle>> ViewAllVehicle();
+        T Get<T>(JObject vehicleObj);
     }
-    abstract class VehicleServiceBase : IVehicleServiceBase
+    abstract class VehicleDbServiceBase : IVehicleDbServiceBase
     {
         readonly DataContext _context;
-        public VehicleServiceBase(DataContext context)
+        public VehicleDbServiceBase(DataContext context)
         {
             _context = context;
         }
@@ -34,6 +36,8 @@ namespace CarSales.Demo.Api.Domain
             }
             return result;
         }
+
+        public abstract T Get<T>(JObject vehicleObj);
         public abstract Task<IEnumerable<Vehicle>> ViewAllVehicle();
     }
 }

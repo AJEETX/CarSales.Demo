@@ -1,4 +1,6 @@
 ﻿using CarSales.Demo.Api.Model;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,22 +10,36 @@ namespace CarSales.Demo.Api.Domain
 {
     public interface IVehicleTableService
     {
-        Task<int> AddVehicle(Vehicle vehicle);
+        Task<int> AddVehicle(JObject vehicle);
 
         Task<IEnumerable<Vehicle>> GetAllVehicles();
     }
     class VehicleTableService : IVehicleTableService
     {
-        readonly Dictionary<VehicleType, IVehicleServiceBase> vehicleTable = new Dictionary<VehicleType, IVehicleServiceBase>();
-        public VehicleTableService(ICarService carService)
+        readonly Dictionary<VehicleType, Func<JObject, Vehicle>> dict = new Dictionary<VehicleType, Func<JObject, Vehicle>>();
+
+        readonly Dictionary<VehicleType, IVehicleDbServiceBase> vehicleTable = new Dictionary<VehicleType, IVehicleDbServiceBase>();
+        public VehicleTableService(ICarDbService carService)
         {
             vehicleTable.Add(VehicleType.CAR, carService);
+            dict.Add(VehicleType.CAR, carService.Get<Car>);
         }
-        public async Task<int> AddVehicle(Vehicle vehicle)
+        public async Task<int> AddVehicle(JObject vehicleObj)
         {
             try
             {
-                return await vehicleTable[vehicle.VehicleType].AddVehicle(vehicle);
+                JToken vehicleType;
+                if (vehicleObj.TryGetValue("VehicleType", out vehicleType))
+                {
+                    VehicleType enumName;
+
+                    if (Enum.TryParse(vehicleType.ToString(), true, out enumName))
+                    {
+                        var vehicle = dict[enumName].Invoke(vehicleObj);
+                        return await vehicleTable[vehicle.VehicleType].AddVehicle(vehicle);
+                    }
+                }
+                return 0;
             }
             catch (Exception e)
             {
@@ -32,22 +48,10 @@ namespace CarSales.Demo.Api.Domain
         }
         public async Task<IEnumerable<Vehicle>> GetAllVehicles()
         {
+            var vehicles = new List<Vehicle>();
             try
             {
                 var vehicleTypes = Enum.GetValues(typeof(VehicleType)).Cast<VehicleType>();
-
-                return await GetAll(vehicleTypes);
-            }
-            catch(Exception ex)
-            {
-                throw new Exception(ex.Message);//log
-            }
-        }
-        private async Task<IEnumerable<Vehicle>> GetAll(IEnumerable<VehicleType> vehicleTypes)
-        {
-            try
-            {
-                var vehicles = new List<Vehicle>();
 
                 foreach (var vehicleType in vehicleTypes)
                 {
@@ -57,7 +61,7 @@ namespace CarSales.Demo.Api.Domain
             }
             catch(Exception ex)
             {
-                throw new Exception(ex.Message); //log
+                throw new Exception(ex.Message);//log
             }
         }
     }

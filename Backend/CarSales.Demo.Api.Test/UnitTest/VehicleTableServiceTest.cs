@@ -1,6 +1,7 @@
 ﻿using CarSales.Demo.Api.Domain;
 using CarSales.Demo.Api.Model;
 using Moq;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,24 +11,22 @@ namespace CarSales.Demo.Api.Test.UnitTest
 {
     public class DbServiceTest : IDisposable
     {
-        Mock<ICarService> moqCarService;
-        Vehicle carObject;
+        Mock<ICarDbService> moqCarDbService;
+        dynamic carObject;
         int SUCCESS;
         private bool disposedValue;
 
         public DbServiceTest()
         {
-            moqCarService = new Mock<ICarService>();
-            carObject = new Car()
-            {
-                Make = "JEEP",
-                Id = 1,
-                Model = "Grand Cherokee",
-                Doors = 5,
-                Wheels = 6,
-                BodyType = "SUV",
-                Engine = "1000CC"
-            };
+            moqCarDbService = new Mock<ICarDbService>();
+            carObject = new JObject();
+            carObject.Make = "JEEP";
+            carObject.Id = 1;
+            carObject.Model = "Grand Cherokee";
+            carObject.Doors = 5;
+            carObject.Wheels = 6;
+            carObject.BodyType = "SUV";
+            carObject.Engine = "1000CC";
         }
 
         [Fact]
@@ -35,8 +34,8 @@ namespace CarSales.Demo.Api.Test.UnitTest
         {
             //given
             SUCCESS = 1;
-            moqCarService.Setup(m => m.AddVehicle(It.IsAny<Vehicle>())).Returns(Task.FromResult<int>(SUCCESS));
-            var sut = new VehicleTableService(moqCarService.Object);
+            moqCarDbService.Setup(m => m.AddVehicle(It.IsAny<Vehicle>())).Returns(Task.FromResult<int>(SUCCESS));
+            var sut = new VehicleTableService(moqCarDbService.Object);
 
             //when
             var result = sut.AddVehicle(carObject);
@@ -50,8 +49,8 @@ namespace CarSales.Demo.Api.Test.UnitTest
         public void GetAllVehicles_returns_all_vehicles()
         {
             //given
-            moqCarService.Setup(m => m.ViewAllVehicle()).Returns(Task.FromResult<IEnumerable<Vehicle>>(new List<Vehicle>()));
-            var sut = new VehicleTableService(moqCarService.Object);
+            moqCarDbService.Setup(m => m.ViewAllVehicle()).Returns(Task.FromResult<IEnumerable<Vehicle>>(new List<Vehicle>()));
+            var sut = new VehicleTableService(moqCarDbService.Object);
 
             //when
             var result = sut.GetAllVehicles();
@@ -66,7 +65,7 @@ namespace CarSales.Demo.Api.Test.UnitTest
             {
                 if (disposing)
                 {
-                    moqCarService = null;
+                    moqCarDbService = null;
                     carObject = null;
                 }
                 disposedValue = true;
