@@ -10,7 +10,7 @@ namespace CarSales.Demo.Api.Domain.Service
     {
         IEnumerable<string> GetVehicleTypes();
         Task<IEnumerable<VehicleDetail>> GetVehicleProperties(string vehicleType);
-        Task<int> AddVehicle(JObject vehicleJObject);
+        Task<Vehicle> AddVehicle(JObject vehicleJObject);
         IEnumerable<Vehicle> GetAllVehicles();
     }
     class VehicleManagerService : IVehicleManagerService
@@ -49,7 +49,7 @@ namespace CarSales.Demo.Api.Domain.Service
             }
             return vehicleDetails;
         }
-        public async Task<int> AddVehicle(JObject vehicleJObject)
+        public async Task<Vehicle> AddVehicle(JObject vehicleJObject)
         {
             try
             {

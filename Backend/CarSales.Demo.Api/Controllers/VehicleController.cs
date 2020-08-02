@@ -108,22 +108,22 @@ namespace CarSales.Demo.Api.Controllers
         [ProducesResponseType(200, Type = typeof(string))]
         [ProducesResponseType(400)]
         [SwaggerRequestExample(typeof(JObject), typeof(VehiclRequestExample))]
-        public async Task<ActionResult<string>> AddVehicle([FromBody]JObject vehicle)
+        public async Task<ActionResult<string>> AddVehicle([FromBody]JObject jObject)
         {
-            if (vehicle == null || !ModelState.IsValid) return BadRequest(ModelState);
+            if (jObject == null || !ModelState.IsValid) return BadRequest(ModelState);
 
-            int vehicleAddmessage;
+            Vehicle vehicle;
 
             try
             {
-                vehicleAddmessage = await _vehicleManagerService.AddVehicle(vehicle);
+                vehicle = await _vehicleManagerService.AddVehicle(jObject);
             }
             catch (AggregateException)
             {
                 return BadRequest();//catch/throw/log
             }
 
-            return Ok(vehicleAddmessage);
+            return Ok(vehicle);
         }
     }
 }

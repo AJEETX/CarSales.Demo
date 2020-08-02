@@ -53,7 +53,7 @@ namespace CarSales.Demo.Api.Test.UnitTest
         public async Task AddVehicle_adds_the_vehicle_with_properties()
         {
             //given
-            int expectedResult = 1;
+            Vehicle expectedResult = new Car { Id=1 };
             JObject carObject = TestData.SampleObject();
             moqVehicleTableService.Setup(m => m.AddVehicle(It.IsAny<JObject>())).ReturnsAsync(expectedResult);
             var sut = new VehicleManagerService(moqVehicleDetailService.Object, moqVehicleTableService.Object);
@@ -62,8 +62,8 @@ namespace CarSales.Demo.Api.Test.UnitTest
             var actualResult = await sut.AddVehicle(carObject);
 
             //then
-            Assert.IsAssignableFrom<int>(actualResult);
-            Assert.Equal(expectedResult, actualResult);
+            Assert.IsAssignableFrom<Car>(actualResult);
+            Assert.Equal(expectedResult.Id, actualResult.Id);
             moqVehicleTableService.Verify(v => v.AddVehicle(It.IsAny<JObject>()), Times.Exactly(1));
         }
         [Fact]

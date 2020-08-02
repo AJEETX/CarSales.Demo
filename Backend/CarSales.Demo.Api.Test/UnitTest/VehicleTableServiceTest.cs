@@ -14,7 +14,6 @@ namespace CarSales.Demo.Api.Test.UnitTest
     {
         Mock<ICarDbService> moqCarDbService;
         Mock<IBoatDbService> moqBoatDbService;
-        int SUCCESS;
         private bool disposedValue;
 
         public DbServiceTest()
@@ -27,18 +26,18 @@ namespace CarSales.Demo.Api.Test.UnitTest
         public async Task AddVehicle_adds_vehicle_of_the_specific_type()
         {
             //given
-            SUCCESS = 1;
+            Vehicle expectedResult = new Car { Id=1 };
             JObject input = TestData.AnotherSampleObject();
             moqCarDbService.Setup(m => m.Cast2Vehicle<Car>(It.IsAny<JObject>())).Returns(new Car());
-            moqCarDbService.Setup(m => m.AddVehicle(It.IsAny<Vehicle>())).ReturnsAsync(SUCCESS);
+            moqCarDbService.Setup(m => m.AddVehicle(It.IsAny<Vehicle>())).ReturnsAsync(expectedResult);
             var sut = new VehicleTableService(moqCarDbService.Object, moqBoatDbService.Object);
 
             //when
-            var result =await sut.AddVehicle(input);
+            var actualResult =await sut.AddVehicle(input);
 
             //then
-            Assert.IsAssignableFrom<int>(result);
-            Assert.Equal(SUCCESS, result);
+            Assert.IsAssignableFrom<Car>(actualResult);
+            Assert.Equal(expectedResult.Id, actualResult.Id);
             moqCarDbService.Verify(v => v.Cast2Vehicle<Car>(It.IsAny<JObject>()), Times.Exactly(1));
             moqCarDbService.Verify(v => v.AddVehicle(It.IsAny<Vehicle>()), Times.Exactly(1));
         }

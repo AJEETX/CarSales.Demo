@@ -9,7 +9,7 @@ namespace CarSales.Demo.Api.Domain.Service
 {
     public interface IVehicleDbServiceBase
     {
-        Task<int> AddVehicle<T>(T vehicle) where T:class;
+        Task<T> AddVehicle<T>(T vehicle) where T:class;
         IEnumerable<Vehicle> GetAllVehicle();
         T Cast2Vehicle<T>(JObject vehicleObj);
     }
@@ -21,7 +21,7 @@ namespace CarSales.Demo.Api.Domain.Service
             _transactionManager = transactionManager;
         }
 
-        public async Task<int> AddVehicle<T>(T vehicle) where T : class
+        public async Task<T> AddVehicle<T>(T vehicle) where T : class
         {
             int result = 0;
             try
@@ -33,7 +33,7 @@ namespace CarSales.Demo.Api.Domain.Service
             {
                 throw new Exception(e.Message);//log
             }
-            return result;
+            return vehicle;
         }
 
         public abstract T Cast2Vehicle<T>(JObject vehicleObj);

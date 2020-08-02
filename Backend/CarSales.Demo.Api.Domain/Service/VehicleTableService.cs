@@ -10,7 +10,7 @@ namespace CarSales.Demo.Api.Domain.Service
 {
     public interface IVehicleTableService
     {
-        Task<int> AddVehicle(JObject vehicle);
+        Task<Vehicle> AddVehicle(JObject vehicle);
 
         IEnumerable<Vehicle> GetAllVehicles();
     }
@@ -23,9 +23,9 @@ namespace CarSales.Demo.Api.Domain.Service
             vehicleTable.Add(VehicleType.CAR, new VehicleMapping(carService, carService.Cast2Vehicle<Car> ));
             vehicleTable.Add(VehicleType.BOAT, new VehicleMapping(boatDbService, boatDbService.Cast2Vehicle<Boat>));
         }
-        public async Task<int> AddVehicle(JObject vehicleObj)
+        public async Task<Vehicle> AddVehicle(JObject vehicleObj)
         {
-            int result = 0;
+            Vehicle result = null;
             try
             {
                 if (vehicleObj.TryGetValue("VehicleType", out JToken vehicleType))
