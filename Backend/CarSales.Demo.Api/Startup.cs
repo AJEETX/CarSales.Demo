@@ -33,7 +33,7 @@ namespace CarSales.Demo.Api
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseCors()
+            app.UseCors(cors=>cors.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod())
                 .UseMvc()
                 .UseSwagger().UseSwaggerUI(c =>
                 {
