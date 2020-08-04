@@ -1,8 +1,8 @@
 import {Routes, RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {ErrorComponent} from './error/error.component';
-import {VehiclesComponent} from './vehiclelist/vehicles.component';
-import {AddComponent} from './vehiclelist/addvehicle/add.component';
+import {ErrorComponent} from './shared/error/error.component';
+import {VehiclesComponent} from './vehicle/vehicles.component';
+import {AddComponent} from './vehicle/addvehicle/add.component';
 
 import {HomeComponent} from './home/home.component';
 
