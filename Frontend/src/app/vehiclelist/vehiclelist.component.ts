@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./vehiclelist.component.css']
 })
 export class VehiclelistComponent implements OnInit, OnDestroy {
-  vehicleList: Vehicle[];
+  vehicles: Vehicle[];
   private subscription: Subscription;
   public Loading = false;
   constructor(private vehicleService: VehicleService) {
@@ -19,7 +19,7 @@ export class VehiclelistComponent implements OnInit, OnDestroy {
     this.Loading = true;
     setTimeout(() => {
       this.subscription = this.vehicleService.getAllVehicles().subscribe(data => {
-        this.vehicleList = data;
+        this.vehicles = data;
         this.Loading = false;
         });
     }, 1000);

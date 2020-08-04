@@ -1,14 +1,15 @@
   <div class="container">
       <div class="row">
           <div class="card">
-              <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Vehicles</h3>
+              <h3 class="card-header text-center font-weight-bold">Vehicles</h3>
               <div class="card-body">
                 <div id="table" class="table-editable">
                   <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x"
                         aria-hidden="true"></i></a></span>
-                  <div class="text-center"><p class="lead" *ngIf = 'Loading'><img src="assets/images/ajax-loader.gif" alt="Loading">
-                  </p></div>
-                  <table *ngIf="vehicleList?.length>0" class="table table-bordered table-responsive-md table-striped text-center">
+                  <div class="text-center">
+                    <p class="lead" *ngIf = 'Loading'><img src="assets/images/ajax-loader.gif" alt="Loading"></p>
+                  </div>
+                  <table *ngIf="vehicles?.length>0" class="table table-bordered table-responsive-md table-striped text-center">
                     <tr>
                       <th class="text-center">#</th>
                       <th class="text-center">Make</th>
@@ -16,7 +17,7 @@
                       <th class="text-center">Engine</th>
                       <th class="text-center">Type</th>
                     </tr>
-                    <tr  *ngFor="let vehicle of vehicleList let i = index">
+                    <tr  *ngFor="let vehicle of vehicles let i = index">
                       <td class="pt-3-half">{{i+1}}</td>
                       <td class="pt-3-half">{{vehicle.Make}}</td>
                       <td class="pt-3-half">{{vehicle.Model}}</td>
@@ -24,7 +25,7 @@
                       <td class="pt-3-half">{{vehicle.VehicleType}}</td>
                     </tr>
                   </table>
-                  <div class="text-center" *ngIf="vehicleList?.length==0">No vehicles to display</div>
+                  <div class="text-center" *ngIf="vehicles?.length==0">No vehicles to display</div>
                 </div>
               </div>
             </div>
