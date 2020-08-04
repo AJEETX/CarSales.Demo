@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {Vehicle} from '../shared/model/vehicle.model';
 import { VehicleService } from '../shared/services/vehicle.service';
 import { Subscription } from 'rxjs';
 
@@ -9,7 +8,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./vehicles.component.css']
 })
 export class VehiclesComponent implements OnInit, OnDestroy {
-  vehicles: Vehicle[];
+  vehicles:any;
   private subscription: Subscription;
   public Loading = false;
   constructor(private vehicleService: VehicleService) {

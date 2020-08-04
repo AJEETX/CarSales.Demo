@@ -6,7 +6,7 @@ import { VehiclesComponent } from './vehiclelist/vehicles.component';
 import { VehicleService} from './shared/services/vehicle.service';
 import { DataService} from './shared/services/data.service';
 import { DropdownDirective } from './shared/directive/dropdowndirective';
-import { ErrorComponentComponent } from './error-component/error-component.component';
+import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,7 +17,7 @@ import { AddComponent } from './vehiclelist/addvehicle/add.component';
     AppComponent,
     VehiclesComponent,
     DropdownDirective,
-    ErrorComponentComponent,
+    ErrorComponent,
     HomeComponent,
     AddComponent
   ],

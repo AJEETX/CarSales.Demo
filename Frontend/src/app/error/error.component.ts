@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
 
 @Component({
-  selector: 'app-error-component',
-  templateUrl: './error-component.component.html',
-  styleUrls: ['./error-component.component.css']
+  selector: 'app-error',
+  templateUrl: './error.component.html',
+  styleUrls: ['./error.component.css']
 })
-export class ErrorComponentComponent implements OnInit {
+export class ErrorComponent implements OnInit {
 errorMessage: string;
   constructor(private route: ActivatedRoute) { }
 

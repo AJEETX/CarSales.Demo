@@ -1,13 +1,13 @@
   <div class="container">
       <div class="row">
-          <div class="card">
-              <h3 class="card-header text-center font-weight-bold">Vehicles</h3>
+          <div class="">
+              <h3 class="text-center font-weight-bold">Vehicles</h3>
               <div class="card-body">
                 <div id="table" class="table-editable">
                   <div class="text-center">
                     <p class="lead" *ngIf = 'Loading'><img src="assets/images/ajax-loader.gif" alt="Loading"></p>
                   </div>
-                  <table *ngIf="vehicles?.length>0" class="table table-bordered table-responsive-md table-striped text-center">
+                  <table *ngIf="vehicles?.length>0" class="table table-bordered table-striped text-center">
                     <tr>
                       <th class="text-center">#</th>
                       <th class="text-center">Make</th>
