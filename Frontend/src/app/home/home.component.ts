@@ -14,6 +14,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.vehicleService.getVehicleTypes().subscribe(data => {
       this.vehicletypes = data;
-    });  }
-
+    });  
+  }
 }

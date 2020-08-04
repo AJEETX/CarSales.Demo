@@ -10,7 +10,6 @@ import { ErrorComponentComponent } from './error-component/error-component.compo
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CustompipePipe } from './shared/pipes/custompipe.pipe';
 import { AddComponent } from './vehiclelist/addvehicle/addvehicle.component';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { AddComponent } from './vehiclelist/addvehicle/addvehicle.component';
     DropdownDirective,
     ErrorComponentComponent,
     HomeComponent,
-    CustompipePipe,
     AddComponent
   ],
   imports: [

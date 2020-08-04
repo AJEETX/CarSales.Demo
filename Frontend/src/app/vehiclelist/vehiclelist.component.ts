@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Vehicle} from '../shared/model/vehicle.model';
 import { VehicleService } from '../shared/services/vehicle.service';
 import { Subscription } from 'rxjs';
@@ -28,5 +28,4 @@ export class VehiclelistComponent implements OnInit, OnDestroy {
    ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }
