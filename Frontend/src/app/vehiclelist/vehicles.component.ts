@@ -4,11 +4,11 @@ import { VehicleService } from '../shared/services/vehicle.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-vehiclelist',
-  templateUrl: './vehiclelist.component.html',
-  styleUrls: ['./vehiclelist.component.css']
+  selector: 'app-vehicles',
+  templateUrl: './vehicles.component.html',
+  styleUrls: ['./vehicles.component.css']
 })
-export class VehiclelistComponent implements OnInit, OnDestroy {
+export class VehiclesComponent implements OnInit, OnDestroy {
   vehicles: Vehicle[];
   private subscription: Subscription;
   public Loading = false;

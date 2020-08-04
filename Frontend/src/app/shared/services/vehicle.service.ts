@@ -13,8 +13,7 @@ export class VehicleService {
 constructor(private http: HttpClient, private dataservice: DataService) { }
 
   getVehicleTypes() {
-    const vehicleTypes = this.http.get<string[]>(environment.baseUrl + '/types');
-    return vehicleTypes;
+    return this.http.get<string[]>(environment.baseUrl + '/types');
   }
 
   getAllVehicles(): Observable<Vehicle[]> {
@@ -24,8 +23,7 @@ constructor(private http: HttpClient, private dataservice: DataService) { }
     return this.http.get(environment.baseUrl + '/' + type).subscribe(
         (response: any) => {
           this.dataservice.setVehicleProps(response);
-        }
-    );
+        });
   }
 
   addVehicle(newVehicle: Vehicle): Observable<any> {

@@ -5,14 +5,13 @@ import { Subscription } from 'rxjs';
 import { DataService } from '../../shared/services/data.service';
 import { FormGroup, FormControl} from '@angular/forms';
 @Component({
-  selector: 'app-addvehicle',
-  templateUrl: './addvehicle.component.html',
-  styleUrls: ['./addvehicle.component.css']
+  selector: 'app-add',
+  templateUrl: './add.component.html',
+  styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit, OnDestroy {
   requestedvehicletype: string;
   vehicleProps: any[];
-  testpropname: string;
   private subscription: Subscription;
   form: FormGroup;
   IdProp = ['Id', 'VehicleType'];
