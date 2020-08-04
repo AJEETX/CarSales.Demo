@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { VehicleService } from '../../shared/services/vehicle.service';
 import { Subscription } from 'rxjs';
 import { DataService } from '../../shared/services/data.service';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl} from '@angular/forms';
 @Component({
   selector: 'app-addvehicle',
   templateUrl: './addvehicle.component.html',
@@ -17,29 +17,17 @@ export class AddComponent implements OnInit, OnDestroy {
   form: FormGroup;
   IdProp = ['Id', 'VehicleType'];
 
-
-  constructor(private fb: FormBuilder, private route: ActivatedRoute,
-     private router: Router, private vehicleService: VehicleService, private dataService: DataService) {
-
-      this.route.params
-      .subscribe(
-        (params: Params) => {
+  constructor(private route: ActivatedRoute, private router: Router, private vehicleService: VehicleService, private dataService: DataService) {
+      this.route.params .subscribe((params: Params) => {
           this.requestedvehicletype = params['type'];
-        }
-      );
-
-      this.vehicleService.getVehicleProps(this.requestedvehicletype);
+        });
+      this.vehicleService.getVehicleProperties(this.requestedvehicletype);
       }
 
   ngOnInit() {
-
-      this.subscription = this.dataService.vehiclePropsChanged
-      .subscribe(
-        (vlist: any) => {
-          this.getProperties(vlist);
-          }
-      );
-
+      this.subscription = this.dataService.vehiclePropsChanged.subscribe((vehicles: any) => {
+          this.getProperties(vehicles);
+          });
     }
 
     getProperties(data) {
@@ -53,7 +41,6 @@ export class AddComponent implements OnInit, OnDestroy {
         formGroup[prop['Name']] = new FormControl(null);
       }
       formGroup['VehicleType'] = new FormControl(this.requestedvehicletype);
-
       this.form = new FormGroup(formGroup);
     }
 
@@ -74,7 +61,4 @@ export class AddComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
-
-
 }

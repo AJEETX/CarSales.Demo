@@ -7,14 +7,14 @@ namespace CarSales.Demo.Api.Model
     public class Car : Vehicle
     {
         [Required]
-        [RegularExpression(@"^[0-9]{1}$")]
+        [RegularExpression(@"^[0-9]{1,}$")]
         public int Doors { get; set; }
 
         [Required]
         public string Engine { get; set; }
 
         [Required]
-        [RegularExpression(@"^[0-9]{1}$")]
+        [RegularExpression(@"^[0-9]{1,}$")]
         public int Wheels { get; set; }
 
         [Required]

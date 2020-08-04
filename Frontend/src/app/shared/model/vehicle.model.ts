@@ -2,7 +2,7 @@ export enum VehicleType {
   CAR,
 }
 
-export   class VehicleProps {
+export  class VehicleDetail {
   Name: string;
   Datatype: string;
   Regex: string;

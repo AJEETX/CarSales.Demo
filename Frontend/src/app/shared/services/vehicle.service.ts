@@ -21,13 +21,8 @@ constructor(private http: HttpClient, private dataservice: DataService) { }
   getAllVehicles(): Observable<Vehicle[]> {
     return this.http.get<Vehicle[]>(environment.baseUrl);
   }
-  getVehicleProps(type: string) {
-    this.http.get(environment.baseUrl + '/' + type).pipe(
-      map(
-        (response: Response) => {
-          return response;
-        }))
-      .subscribe(
+  getVehicleProperties(type: string) {
+    return this.http.get(environment.baseUrl + '/' + type).subscribe(
         (response: any) => {
           this.dataservice.setVehicleProps(response);
         }
@@ -35,14 +30,6 @@ constructor(private http: HttpClient, private dataservice: DataService) { }
   }
 
   addVehicle(newVehicle: Vehicle): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + '/add', newVehicle);
-  }
-
-  updateVehicle(updateVehicle: Vehicle): Observable<string> {
-    return this.http.put<string>(environment.baseUrl + '/update', updateVehicle);
-  }
-
-  getVehicle(vehicleType: string, id: number): Observable<Vehicle> {
-     return this.http.get<Vehicle>(environment.baseUrl + '/' + vehicleType + '/' + id);
+    return this.http.post<any>(environment.baseUrl, newVehicle);
   }
 }

@@ -79,7 +79,7 @@ namespace CarSales.Demo.Api.Controllers
         /// Retrieves all the vehicles
         /// </summary>
         /// <returns></returns>
-        [HttpGet("")]
+        [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<Vehicle>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -104,7 +104,7 @@ namespace CarSales.Demo.Api.Controllers
         /// </summary>
         /// <param name="vehicle"></param>
         /// <returns></returns>
-        [HttpPost("Add")]
+        [HttpPost]
         [ProducesResponseType(200, Type = typeof(string))]
         [ProducesResponseType(400)]
         [SwaggerRequestExample(typeof(JObject), typeof(VehiclRequestExample))]
