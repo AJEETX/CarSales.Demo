@@ -1,3 +1,7 @@
 h2{
     color: blueviolet;
 }
+.error{
+    color: brown;
+    font-weight: bold;
+}
