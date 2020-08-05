@@ -11,7 +11,6 @@
               <span *ngIf="!form.get(prop.Name).valid && form.get(prop.Name).touched" class="help-block"> Please enter {{prop.Name}} </span>
           </div> 
           <br>
-          <span *ngIf="!form.valid && form.touched" class="help-block"> Please enter a valid data </span>
             <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Add {{requestedvehicletype}}</button>
             <button class="btn btn-warning" type="button" style="margin-left: 5px" (click)='cancel()'>Cancel</button>
         </form>

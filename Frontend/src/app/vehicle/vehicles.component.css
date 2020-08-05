@@ -1,4 +1,9 @@
 .pt-3-half {
   padding-top: 1.4rem;
   padding-bottom: 1.4rem;
+  border: 1px solid #ddd;
+  }
+  th{
+    font-weight: bold;
+    background-color: aliceblue;
   }

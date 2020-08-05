@@ -8,13 +8,13 @@
                   <div class="text-center">
                     <p class="lead" *ngIf = 'Loading'><img src="assets/images/ajax-loader.gif" alt="Loading"></p>
                   </div>
-                  <table *ngIf="vehicles?.length>0" class="table table-bordered table-striped text-center">
+                  <table *ngIf="vehicles?.length>0" class="table table-bordered text-center">
                     <tr>
-                      <th class="text-center">#</th>
-                      <th class="text-center">Make</th>
-                      <th class="text-center">Model</th>
-                      <th class="text-center">Engine</th>
-                      <th class="text-center">Type</th>
+                      <th class="pt-3-half text-center">#</th>
+                      <th class="pt-3-half text-center">Make</th>
+                      <th class="pt-3-half text-center">Model</th>
+                      <th class="pt-3-half text-center">Engine</th>
+                      <th class="pt-3-half text-center">Type</th>
                     </tr>
                     <tr  *ngFor="let vehicle of vehicles let i = index">
                       <td class="pt-3-half">{{i+1}}</td>
