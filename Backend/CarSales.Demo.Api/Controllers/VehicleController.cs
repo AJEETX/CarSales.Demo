@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CarSales.Demo.Api.Domain;
 using CarSales.Demo.Api.Domain.Helper;
 using CarSales.Demo.Api.Domain.Service;
 using CarSales.Demo.Api.Model;
@@ -27,9 +25,9 @@ namespace CarSales.Demo.Api.Controllers
         /// Retrieve all the Vehicle types.
         /// </summary>
         [HttpGet("types")]
-        [ProducesResponseType(200, Type = typeof(List<string>))]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<string>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<string>> GetVehicleTypes()
         {
             IEnumerable<string> vehicleTypes;
@@ -54,8 +52,8 @@ namespace CarSales.Demo.Api.Controllers
         /// <returns></returns>
         [HttpGet("{type}")]
         [ProducesResponseType(200, Type = typeof(List<string>))]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<VehicleDetail>>> GetVehicleProperties(string type)
 
         {
@@ -80,8 +78,7 @@ namespace CarSales.Demo.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<Vehicle>))]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllVehicles()
         {
             IEnumerable<Vehicle> vehicles;
@@ -103,10 +100,10 @@ namespace CarSales.Demo.Api.Controllers
         /// <param name="vehicle"></param>
         /// <returns></returns>
         [HttpPost]
-        [ProducesResponseType(200, Type = typeof(Vehicle))]
-        [ProducesResponseType(400)]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Vehicle))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [SwaggerRequestExample(typeof(JObject), typeof(VehiclRequestExample))]
-        public async Task<IActionResult> AddVehicle([FromBody]JObject jObject)
+        public async Task<IActionResult> AddVehicle([FromBody] JObject jObject)
         {
             if (jObject == null || !ModelState.IsValid) return BadRequest(ModelState);
 
