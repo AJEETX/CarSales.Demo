@@ -105,7 +105,7 @@ namespace CarSales.Demo.Api.Controllers
         /// <param name="vehicle"></param>
         /// <returns></returns>
         [HttpPost]
-        [ProducesResponseType(200, Type = typeof(string))]
+        [ProducesResponseType(200, Type = typeof(Vehicle))]
         [ProducesResponseType(400)]
         [SwaggerRequestExample(typeof(JObject), typeof(VehiclRequestExample))]
         public async Task<IActionResult> AddVehicle([FromBody]JObject jObject)

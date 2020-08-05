@@ -14,7 +14,7 @@ namespace CarSales.Demo.Api.Domain.Service
     }
     partial class VehicleDetailService : IVehicleDetailService
     {
-        Dictionary<VehicleType, Vehicle> vehicleDictionary = new Dictionary<VehicleType, Vehicle>();
+        readonly Dictionary<VehicleType, Vehicle> vehicleDictionary = new Dictionary<VehicleType, Vehicle>();
         public VehicleDetailService()
         {
             vehicleDictionary.Add(VehicleType.CAR, new Car());
@@ -27,9 +27,9 @@ namespace CarSales.Demo.Api.Domain.Service
             {
                 vehicleProperties = await Task.Run(() => GetProperties(vehicleType));
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);//log
+               //log
             }
             return vehicleProperties;
 

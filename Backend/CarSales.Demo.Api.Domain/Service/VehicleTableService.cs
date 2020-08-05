@@ -10,38 +10,39 @@ namespace CarSales.Demo.Api.Domain.Service
 {
     public interface IVehicleTableService
     {
-        Task<Vehicle> AddVehicle(JObject vehicle);
+        Task<Vehicle> AddVehicle(JObject jVehicle);
 
         IEnumerable<Vehicle> GetAllVehicles();
     }
     partial class VehicleTableService : IVehicleTableService
     {
 
-        Dictionary<VehicleType, VehicleMapping> vehicleTable = new Dictionary<VehicleType, VehicleMapping>();
+        readonly Dictionary<VehicleType, VehicleMapping> vehicleTable = new Dictionary<VehicleType, VehicleMapping>();
         public VehicleTableService(ICarDbService carService, IBoatDbService boatDbService)
         {
             vehicleTable.Add(VehicleType.CAR, new VehicleMapping(carService, carService.Cast2Vehicle<Car> ));
             vehicleTable.Add(VehicleType.BOAT, new VehicleMapping(boatDbService, boatDbService.Cast2Vehicle<Boat>));
         }
-        public async Task<Vehicle> AddVehicle(JObject vehicleObj)
+        public async Task<Vehicle> AddVehicle(JObject jVehicle)
         {
             Vehicle result = null;
             try
             {
-                if (vehicleObj.TryGetValue("VehicleType", out JToken vehicleType))
+                if (jVehicle.TryGetValue("VehicleType", out JToken vehicleType))
                 {
                     if (Enum.TryParse(vehicleType.ToString(), true, out VehicleType enumName))
                     {
-                        var vehicle = vehicleTable[enumName].Func.Invoke(vehicleObj);
+                        var vehicle = vehicleTable[enumName].Func.Invoke(jVehicle);
                         result= await vehicleTable[vehicle.VehicleType].VehicleDbServiceBase.AddVehicle(vehicle);
                     }
                 }
-                return result;
             }
-            catch (Exception e)
+            catch
             {
-                throw new Exception(e.Message);//log
+                //log
             }
+            
+            return result;
         }
         public IEnumerable<Vehicle> GetAllVehicles()
         {
@@ -54,12 +55,12 @@ namespace CarSales.Demo.Api.Domain.Service
                 {
                     vehicles.AddRange(vehicleTable[vehicleType].VehicleDbServiceBase.GetAllVehicle());
                 }
-                return vehicles;
             }
-            catch(Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);//log
+                //log
             }
+            return vehicles;
         }
     }
 }

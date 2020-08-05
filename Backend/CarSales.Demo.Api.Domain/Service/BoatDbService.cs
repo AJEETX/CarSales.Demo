@@ -12,7 +12,7 @@ namespace CarSales.Demo.Api.Domain.Service
     }
     class BoatDbService : VehicleDbServiceBase, IBoatDbService
     {
-        ITransactionManager _transactionManager;
+        readonly ITransactionManager _transactionManager;
         public BoatDbService(ITransactionManager transactionManager) : base(transactionManager)
         {
             _transactionManager = transactionManager;
@@ -25,7 +25,7 @@ namespace CarSales.Demo.Api.Domain.Service
             {
                 vehicles= _transactionManager.CreateRepository<Boat>().Get();
             }
-            catch (Exception ex)
+            catch
             {
                 //log
             }

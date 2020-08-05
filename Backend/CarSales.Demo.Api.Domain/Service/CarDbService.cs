@@ -12,7 +12,7 @@ namespace CarSales.Demo.Api.Domain.Service
     }
     class CarDbService : VehicleDbServiceBase, ICarDbService
     {
-        ITransactionManager _transactionManager;
+        readonly ITransactionManager _transactionManager;
         public CarDbService(ITransactionManager transactionManager) :base(transactionManager)
         {
             _transactionManager = transactionManager;

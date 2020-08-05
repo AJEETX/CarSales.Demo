@@ -24,14 +24,16 @@ namespace CarSales.Demo.Api.Domain.Service
         }
         public IEnumerable<string> GetVehicleTypes()
         {
+            IEnumerable<string> vehicleTypes = null;
             try
             {
-                return Enum.GetNames(typeof(VehicleType));
+                vehicleTypes= Enum.GetNames(typeof(VehicleType));
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message); //log
+                //log
             }
+            return vehicleTypes;
         }
         public async Task<IEnumerable<VehicleDetail>> GetVehicleProperties(string vehicleType)
         {
@@ -43,33 +45,37 @@ namespace CarSales.Demo.Api.Domain.Service
                     vehicleDetails = await _vehicleDetailService.GetVehicleProperties(enumName);
                 }
             }
-            catch(Exception ex)
+            catch
             {
-                throw new Exception(ex.Message); //log
+                //log
             }
             return vehicleDetails;
         }
         public async Task<Vehicle> AddVehicle(JObject vehicleJObject)
         {
+            Vehicle vehicle = null;
             try
             {
-                return await _vehicleTableService.AddVehicle(vehicleJObject);
+                vehicle= await _vehicleTableService.AddVehicle(vehicleJObject);
             }
-            catch (Exception e)
+            catch
             {
-                throw new Exception(e.Message); //log
+                //log
             }
+            return vehicle;
         }
         public IEnumerable<Vehicle> GetAllVehicles()
         {
+            IEnumerable<Vehicle> vehicles = null;
             try
             {
-                return _vehicleTableService.GetAllVehicles();
+                vehicles= _vehicleTableService.GetAllVehicles();
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message); //log
+                //log
             }
+            return vehicles;
         }
     }
 }

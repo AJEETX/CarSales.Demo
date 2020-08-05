@@ -15,7 +15,7 @@ namespace CarSales.Demo.Api.Domain.Service
     }
     abstract class VehicleDbServiceBase : IVehicleDbServiceBase
     {
-        ITransactionManager _transactionManager;
+        readonly ITransactionManager _transactionManager;
         public VehicleDbServiceBase(ITransactionManager transactionManager)
         {
             _transactionManager = transactionManager;
@@ -23,15 +23,14 @@ namespace CarSales.Demo.Api.Domain.Service
 
         public async Task<T> AddVehicle<T>(T vehicle) where T : class
         {
-            int result = 0;
             try
             {
                 await _transactionManager.CreateRepository<T>().Add(vehicle);
-                result= await _transactionManager.SaveAsync();
+                await _transactionManager.SaveAsync();
             }
-            catch (Exception e)
+            catch
             {
-                throw new Exception(e.Message);//log
+                //log
             }
             return vehicle;
         }
