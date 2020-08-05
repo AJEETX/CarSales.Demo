@@ -1,13 +1,14 @@
 <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <div class = "btn-group" appDropdowndirective>
-      <button class="btn btn-primary" dropdown-toggle>Add Vehicle <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      <li><a style= "cursor:pointer" [routerLink]="[ '/Add',vehicle ]" *ngFor="let vehicle of vehicletypes let i = index">{{vehicle}}</a></li>
-    </ul>
+      <h2 class="text-center">CarSales demo </h2>
+      <div class="col-md-12 text-center">
+        <div class="btn-group" appDropdowndirective>
+          <button class="btn btn-info" dropdown-toggle>SELECT VEHICLE TYPE <span class="caret"></span></button>
+            <ul class="dropdown-menu" style="width: 100%;">
+              <li><a style= "cursor:pointer" [routerLink]="[ '/Add',vehicle ]" *ngFor="let vehicle of vehicletypes let i = index">{{vehicle}}</a></li>
+            </ul>
+        </div>
       </div>
-    </div>
     </div>
     <div class="row">
         <div class="col-xs-12">

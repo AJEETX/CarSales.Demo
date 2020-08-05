@@ -1,17 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { VehicleProps} from '../model/vehicle.model';
 
 @Injectable()
 export class DataService {
-  vehiclePropsChanged = new Subject<VehicleProps[]>();
-  vehicleProps: VehicleProps[];
+  vehiclePropsChanged = new Subject<any>();
   constructor() {}
   setVehicleProps(_vehicleProps: any) {
-    this.vehicleProps = _vehicleProps;
-    this.vehiclePropsChanged.next(this.vehicleProps.slice());
-  }
- getVehicleProps() {
-    return this.vehicleProps;
+    this.vehiclePropsChanged.next(_vehicleProps.slice());
   }
 }

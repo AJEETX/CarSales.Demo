@@ -1,18 +1,15 @@
-
-import {Routes, RouterModule, CanActivateChild} from '@angular/router';
-import { NgModule } from '@angular/core';
-import { ErrorComponentComponent } from './error-component/error-component.component';
-import {VehiclelistComponent} from './vehiclelist/vehiclelist.component';
-import {AddComponent} from './vehiclelist/addvehicle/addvehicle.component';
-import {EditvehicleComponent} from './vehiclelist/editvehicle/editvehicle.component';
+import {Routes, RouterModule} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {ErrorComponent} from './shared/error/error.component';
+import {VehiclesComponent} from './vehicle/vehicles.component';
+import {AddComponent} from './vehicle/addvehicle/add.component';
 
 import {HomeComponent} from './home/home.component';
 
 const appRoute: Routes = [
-  {path: '', component: HomeComponent, children: [ {path: '', component: VehiclelistComponent},
-  {path: 'Edit/:type/:id', component: EditvehicleComponent}]},
+  {path: '', component: HomeComponent, children: [ {path: '', component: VehiclesComponent}]},
   {path: 'Add/:type', component: AddComponent},
-  {path: '**', component: ErrorComponentComponent, data: {message: 'Page not found'} }
+  {path: '**', component: ErrorComponent, data: {message: 'Page not found'} }
 ];
 
 @NgModule ({
@@ -23,5 +20,4 @@ const appRoute: Routes = [
 })
 
 export class AppRoutingModule {
-
 }
