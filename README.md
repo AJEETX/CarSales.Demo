@@ -77,7 +77,7 @@ The repository consists of projects as below:
 >
 >   <img width=“1469” alt=“list” src="https://github.com/AJEETX/CarSales.Demo/blob/master/client.PNG">
 ```
-For better experience please chrome browser
+For better experience please use chrome browser
 ```
 
 ### Support or Contact
