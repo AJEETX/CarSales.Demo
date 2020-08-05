@@ -84,6 +84,6 @@ For better experience please use chrome browser
 
 Having any trouble? Please read out this [documentation](https://github.com/AJEETX/CarSales.Demo/blob/master/README.md) or [contact](mailto:ajeetkumar@email.com) and to sort it out.
 
- [![HitCount](http://hits.dwyl.com/ajeetx/carsalesdemo.svg)](http://hits.dwyl.com/ajeetx/carsalesdemo) | ![GitHub contributors](https://img.shields.io/github/contributors/ajeetx/CarSales.Demo.svg?style=plastic)|
+ [![HitCount](http://hits.dwyl.com/ajeetx/carsales.demo.svg)](http://hits.dwyl.com/ajeetx/carsales.demo) | ![GitHub contributors](https://img.shields.io/github/contributors/ajeetx/CarSales.Demo.svg?style=plastic)|
  | --- | --- |
 
