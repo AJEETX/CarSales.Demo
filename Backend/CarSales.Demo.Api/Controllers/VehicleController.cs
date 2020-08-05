@@ -5,6 +5,7 @@ using CarSales.Demo.Api.Domain;
 using CarSales.Demo.Api.Domain.Helper;
 using CarSales.Demo.Api.Domain.Service;
 using CarSales.Demo.Api.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Swashbuckle.AspNetCore.Examples;
@@ -39,11 +40,10 @@ namespace CarSales.Demo.Api.Controllers
 
                 if (vehicleTypes == null) return NotFound();
             }
-            catch (AggregateException)
+            catch
             {
-                return BadRequest();//catch/throw/log
+                return StatusCode(StatusCodes.Status500InternalServerError, "something went wrong");//catch/throw/log
             }
-
             return Ok(vehicleTypes);
 
         }
@@ -67,11 +67,10 @@ namespace CarSales.Demo.Api.Controllers
                 vehicleProperties = await _vehicleManagerService.GetVehicleProperties(type);
                 if (vehicleProperties == null) return NotFound();
             }
-            catch (AggregateException)
+            catch
             {
-                return BadRequest();//catch/throw/log
+                return StatusCode(StatusCodes.Status500InternalServerError, "something went wrong");//catch/throw/log
             }
-
             return Ok(vehicleProperties);
 
         }
@@ -91,11 +90,10 @@ namespace CarSales.Demo.Api.Controllers
                 vehicles =  _vehicleManagerService.GetAllVehicles();
                 if (vehicles == null) return NotFound();
             }
-            catch (AggregateException)
+            catch
             {
-                return BadRequest();//catch/throw/log
+                return StatusCode(StatusCodes.Status500InternalServerError, "something went wrong");//catch/throw/log
             }
-
             return Ok(vehicles);
 
         }
@@ -118,11 +116,10 @@ namespace CarSales.Demo.Api.Controllers
             {
                 vehicle = await _vehicleManagerService.AddVehicle(jObject);
             }
-            catch (AggregateException)
+            catch
             {
-                return BadRequest();//catch/throw/log
+                return StatusCode(StatusCodes.Status500InternalServerError, "something went wrong");//catch/throw/log
             }
-
             return Ok(vehicle);
         }
     }
