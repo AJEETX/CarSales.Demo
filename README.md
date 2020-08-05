@@ -52,7 +52,7 @@ The repository consists of projects as below:
 >
 >   6. To verify the Webapi is running open the url **http://localhost:3000** in chrome browser, the page shall be displayed as below
 >
->   <img width=“1469” alt=“list” src="https://github.com/AJEETX/carsales.demo/blob/master/swagger.png">
+>   <img width=“1469” alt=“list” src="https://github.com/AJEETX/CarSales.Demo/blob/master/swagger.PNG">
 
 
 ##### (b) To run the unit test project
@@ -75,7 +75,7 @@ The repository consists of projects as below:
 >   
 >   5. Shortly a browser shall open with url as `localhost:5000`, and the page shall be displayed as below.
 >
->   <img width=“1469” alt=“list” src="https://github.com/AJEETX/carsales.demo/blob/master/client.png">
+>   <img width=“1469” alt=“list” src="https://github.com/AJEETX/CarSales.Demo/blob/master/client.PNG">
 ```
 For better experience please chrome browser
 ```
