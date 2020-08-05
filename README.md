@@ -1,6 +1,6 @@
 # CarSales.Demo
-[![.Net Framework](https://img.shields.io/badge/DotNet-2.1_Framework-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.1) |[![Node](https://img.shields.io/badge/Node-Js-blue.svg?style=plastic)](https://nodejs.org/en/download/) | ![GitHub language count](https://img.shields.io/github/languages/count/ajeetx/CarSales.Demo.svg) | ![GitHub top language](https://img.shields.io/github/languages/top/ajeetx/CarSales.Demo.svg) |![GitHub repo size in bytes](https://img.shields.io/github/repo-size/ajeetx/CarSales.Demo.svg) 
-| --- | ---          | ---        | ---      | ---        | 
+[![.Net Framework](https://img.shields.io/badge/DotNet-2.1_Framework-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.1) |[![Node](https://img.shields.io/badge/Node-Js-blue.svg?style=plastic)](https://nodejs.org/en/download/) | [![Angular](https://img.shields.io/badge/angular-8-blue)](https://angular.io/) | ![GitHub language count](https://img.shields.io/github/languages/count/ajeetx/CarSales.Demo.svg) | ![GitHub top language](https://img.shields.io/github/languages/top/ajeetx/CarSales.Demo.svg) |![GitHub repo size in bytes](https://img.shields.io/github/repo-size/ajeetx/CarSales.Demo.svg) 
+| --- | ---          | ---        | ---      | ---        |  --- |
 
 ---------------------------------------
 
@@ -28,7 +28,7 @@ The repository consists of projects as below:
 >	
 >   4. In Visual Studio Code, please install a [![c#](https://img.shields.io/badge/cSharp-extension-blue.svg?style=plastic)](https://github.com/OmniSharp/omnisharp-roslyn)
 >   
->   5. Please install angular-cli version 8
+>   5. Please install angular-cli version 8 [![Angular](https://img.shields.io/badge/angular-8-blue)](https://angular.io/)
 >   
 
 ##### Project Setup detail
