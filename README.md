@@ -13,7 +13,7 @@ The repository consists of projects as below:
 | ---| ---  | ---           | ---          | --- |
 | 1 | CarSale.Demo.Api | Asp.Net Core WebApi as backend  |  Backend folder | [![.Net Framework](https://img.shields.io/badge/DotNet-2.1_Framework-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.1)|
 | 2 | CarSale.Demo.Api.Test | Unit Test for Api |  Backend folder | [![.Net Framework](https://img.shields.io/badge/DotNet-2.1_Framework-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.1)| 
-| 3 | carsales | angular application   | Frontend folder | [![Node](https://img.shields.io/badge/Node-Js-blue.svg?style=plastic)](https://nodejs.org/en/download/) |
+| 3 | carsales | angular application   | Frontend folder | [![Node](https://img.shields.io/badge/Node-Js-blue.svg?style=plastic)](https://nodejs.org/en/download/)  [![Angular](https://img.shields.io/badge/angular-8-blue)](https://angular.io/) |
 
 ### Setup detail
 
