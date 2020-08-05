@@ -36,6 +36,10 @@ constructor(private http: HttpClient, private dataservice: DataService) { }
   }
 
   addVehicle(newVehicle): Observable<any> {
-    return this.http.post<any>(environment.baseUrl+ this.relativeUrl, newVehicle);
+    return this.http.post<any>(environment.baseUrl+ this.relativeUrl, newVehicle).
+    pipe(catchError(error => {
+      this.alertMessage$.next(error.message);
+      return throwError(error.message);
+    } ));
   }
 }

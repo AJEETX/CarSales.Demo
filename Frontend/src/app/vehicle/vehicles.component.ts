@@ -7,22 +7,26 @@ import { Subscription, Observable } from 'rxjs';
   templateUrl: './vehicles.component.html',
   styleUrls: ['./vehicles.component.css']
 })
-export class VehiclesComponent implements OnInit {
+export class VehiclesComponent implements OnInit, OnDestroy {
   vehicles:any;
-
   errormessage$: Observable<any>;
-  vehicles$: Observable<any>;
   private subscription: Subscription;
   public Loading = false;
-
   constructor(private vehicleService: VehicleService) {
    }
 
   ngOnInit() {
     this.Loading = true;
-    this.vehicles$ = this.vehicleService.getAllVehicles();
+    setTimeout(() => {
+      this.subscription = this.vehicleService.getAllVehicles().subscribe(data => {
+        this.vehicles = data;
+        this.Loading = false;
+        });
+        this.errormessage$ = this.vehicleService.errorMessage;
+    }, 1000);
    }
-ngAfterViewInit(){
-  this.Loading = false;
-}
+
+   ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }
