@@ -2,7 +2,13 @@
       <div class="row">
           <div class="">
               <h3 class="text-center font-weight-bold">Vehicles</h3>
-              <div class="card-body">
+              <span *ngIf = "errormessage$ | async as errormessage">
+                <div class="content">
+                  <p>{{errormessage}}</p>
+                </div>
+              </span>
+              <span *ngIf = "!(errormessage$ | async)">
+              <div class="card-body" *ngIf = "vehicles$ | async as vehicles">
                 <div id="table" class="table-editable">
                   <div class="text-center">
                     <p class="lead" *ngIf = 'Loading'><img src="assets/images/ajax-loader.gif" alt="Loading"></p>
@@ -26,6 +32,7 @@
                   <div class="text-center" *ngIf="vehicles?.length==0">No vehicles to display</div>
                 </div>
               </div>
+            </span>
             </div>
       </div>
       <div class="row">

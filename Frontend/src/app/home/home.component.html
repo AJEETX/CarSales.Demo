@@ -1,7 +1,13 @@
 <div class="container">
     <div class="row">
       <h2 class="text-center">CarSales demo </h2>
-      <div class="col-md-12 text-center">
+      <span *ngIf = "errormessage$ | async">
+        <div class="content">
+          <div class="col-md-12 text-center">{{customErrorMessage}}</div>
+        </div>
+      </span>
+      <span *ngIf = "!(errormessage$ | async)">
+      <div class="col-md-12 text-center" *ngIf = "vehicletypes$ | async as vehicletypes">
         <div class="btn-group" appDropdowndirective>
           <button class="btn btn-info" dropdown-toggle>SELECT VEHICLE TYPE <span class="caret"></span></button>
             <ul class="dropdown-menu" style="width: 100%;">
@@ -9,10 +15,13 @@
             </ul>
         </div>
       </div>
+    </span>
     </div>
+
     <div class="row">
         <div class="col-xs-12">
           <router-outlet></router-outlet>
         </div>
     </div>
+
 </div>

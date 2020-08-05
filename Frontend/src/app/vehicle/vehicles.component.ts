@@ -1,30 +1,28 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { VehicleService } from '../shared/services/vehicle.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-vehicles',
   templateUrl: './vehicles.component.html',
   styleUrls: ['./vehicles.component.css']
 })
-export class VehiclesComponent implements OnInit, OnDestroy {
+export class VehiclesComponent implements OnInit {
   vehicles:any;
+
+  errormessage$: Observable<any>;
+  vehicles$: Observable<any>;
   private subscription: Subscription;
   public Loading = false;
+
   constructor(private vehicleService: VehicleService) {
    }
 
   ngOnInit() {
     this.Loading = true;
-    setTimeout(() => {
-      this.subscription = this.vehicleService.getAllVehicles().subscribe(data => {
-        this.vehicles = data;
-        this.Loading = false;
-        });
-    }, 1000);
+    this.vehicles$ = this.vehicleService.getAllVehicles();
    }
-
-   ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+ngAfterViewInit(){
+  this.Loading = false;
+}
 }
