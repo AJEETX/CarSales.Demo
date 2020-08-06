@@ -18,8 +18,31 @@ The repository consists of projects as below:
 | # |Project Name | Project detail | location| Environment |
 | ---| ---  | ---           | ---          | --- |
 | 1 | CarSale.Demo.Api | Asp.Net Core WebApi as backend  |  **Backend** folder | [![.Net Framework](https://img.shields.io/badge/DotNet-2.1_Framework-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.1)|
-| 2 | CarSale.Demo.Api.Test | Unit Test for Api |  **Backend** folder | [![.Net Framework](https://img.shields.io/badge/DotNet-2.1_Framework-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.1)| 
-| 3 | carsales | angular application   | **Frontend**"** folder | [![Node](https://img.shields.io/badge/Node-Js-blue.svg?style=plastic)](https://nodejs.org/en/download/)  [![Angular](https://img.shields.io/badge/angular-8-blue)](https://angular.io/) |
+| 2 | CarSale.Demo.Api.Domain | Business logic  |  **Backend** folder | [![.Net Framework](https://img.shields.io/badge/DotNet-2.1_Framework-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.1)|
+| 3 | CarSale.Demo.Api.Test | Unit Test for Api |  **Backend** folder | [![.Net Framework](https://img.shields.io/badge/DotNet-2.1_Framework-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.1)| 
+| 4 | carsales | angular application   | **Frontend** folder | [![Node](https://img.shields.io/badge/Node-Js-blue.svg?style=plastic)](https://nodejs.org/en/download/)  [![Angular](https://img.shields.io/badge/angular-8-blue)](https://angular.io/) |
+
+## Design highlight
+
+> For future enhancements to add more type of vehicles for example **motor bike**:
+
+| angular application | Remarks |
+| --- | --- |
+| No change required | none |
+
+
+| CarSale.Demo.Api application   |  Remarks |
+| --- | --- |
+| No change in endpoints |  none |
+
+| CarSale.Demo.Api.Domain class library   |  Remarks |
+| --- | --- |
+| Add enum and model for the new vehicle i.e. motorbike | Add new code |
+| Hook up the enum/model to VehicleDetailService to add new VehicleType  | `Modify` existing code |
+| Add/implement an interface i.e. *IMotobikeDbService* implementing *IVehicleDbServiceBase* |  Add new code |
+| Inject VehicleDetailService  with 'IMotobikeDbService' | `Modify` existing code`  |
+| Wire up 'IMotobikeDbService' in the Dependency injection graph  | `Modify` existing code  |
+
 
 ##### Environment Setup
 
