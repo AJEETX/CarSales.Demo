@@ -11,13 +11,11 @@ The repository consists of projects as below:
 
 | # |Project Name | Project detail | location| Environment |
 | ---| ---  | ---           | ---          | --- |
-| 1 | CarSale.Demo.Api | Asp.Net Core WebApi as backend  |  Backend folder | [![.Net Framework](https://img.shields.io/badge/DotNet-2.1_Framework-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.1)|
-| 2 | CarSale.Demo.Api.Test | Unit Test for Api |  Backend folder | [![.Net Framework](https://img.shields.io/badge/DotNet-2.1_Framework-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.1)| 
-| 3 | carsales | angular application   | Frontend folder | [![Node](https://img.shields.io/badge/Node-Js-blue.svg?style=plastic)](https://nodejs.org/en/download/)  [![Angular](https://img.shields.io/badge/angular-8-blue)](https://angular.io/) |
+| 1 | CarSale.Demo.Api | Asp.Net Core WebApi as backend  |  **Backend** folder | [![.Net Framework](https://img.shields.io/badge/DotNet-2.1_Framework-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.1)|
+| 2 | CarSale.Demo.Api.Test | Unit Test for Api |  **Backend** folder | [![.Net Framework](https://img.shields.io/badge/DotNet-2.1_Framework-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.1)| 
+| 3 | carsales | angular application   | "Frontend" folder | [![Node](https://img.shields.io/badge/Node-Js-blue.svg?style=plastic)](https://nodejs.org/en/download/)  [![Angular](https://img.shields.io/badge/angular-8-blue)](https://angular.io/) |
 
-### Setup detail
-
-##### Environment Setup detail
+##### Environment Setup
 
 > Download/install   	
 >	1.	[![.Net Framework](https://img.shields.io/badge/DotNet-2.1_Framework-blue.svg?style=plastic)](https://www.microsoft.com/net/download/dotnet-core/2.1) to run CarSale.Demo.Api and CarSale.Demo.Api.Test project
@@ -31,7 +29,7 @@ The repository consists of projects as below:
 >   5. Please install angular-cli version 8 [![Angular](https://img.shields.io/badge/angular-8-blue)](https://angular.io/)
 >   
 
-##### Project Setup detail
+##### Project Setup
 
 >   1. Please clone or download the repository from [![github](https://img.shields.io/badge/git-hub-blue.svg?style=plastic)](https://github.com/AJEETX/CarSales.Demo) 
 >   
@@ -42,7 +40,7 @@ The repository consists of projects as below:
    
 >   1. Within **Visual Studio Code** open a command terminal by pressing the computer keyboard buttons `Control` and `~`
 >    
->   2. Within the terminal, browse to location named as **"Backend/CarSales.Demo.Api"** 
+>   2. Within the terminal, browse to  root location of  webapi project [**"Backend/CarSales.Demo.Api"**]
 >  
 >   3. Restore the dependencies, type `dotnet restore` on the terminal
 >
@@ -50,7 +48,7 @@ The repository consists of projects as below:
 >   
 >   5. **Webapi** [backend service] shall start running on port **3000**
 >
->   6. To verify the Webapi is running open the url **http://localhost:3000** in chrome browser, the page shall be displayed as below
+>   6. To verify the Webapi is running, open the url **http://localhost:3000** in chrome browser, the page shall be displayed as below
 >
 >   <img width=“1469” alt=“list” src="https://github.com/AJEETX/CarSales.Demo/blob/master/swagger.PNG">
 
@@ -59,7 +57,7 @@ The repository consists of projects as below:
 
 >   1. Within **Visual Studio Code** Open a new command terminal
 >   
->   2. Within the new terminal, browse to the location named as **"Backend/CarSales.Demo.Api.Test"**
+>   2. Within the new terminal, browse to the root location of webapi test project [**"Backend/CarSales.Demo.Api.Test"**]
 >   
 >   3. To run the tests, type `dotnet test` on the terminal
 
@@ -71,11 +69,12 @@ The repository consists of projects as below:
 >   
 >   3. To restore the dependencies, type `npm install` on the terminal
 >   
->   4. Now in order to run the CarSales.Demo (front end application), type `npm start` on the terminal
+>   4. Now in order to run the front end application, type `npm start` on the terminal
 >   
 >   5. Shortly a browser shall open with url as `localhost:5000`, and the page shall be displayed as below.
 >
 >   <img width=“1469” alt=“list” src="https://github.com/AJEETX/CarSales.Demo/blob/master/client.PNG">
+
 ```
 For better experience please use chrome browser
 ```
