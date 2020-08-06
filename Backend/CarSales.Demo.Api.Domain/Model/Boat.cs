@@ -8,12 +8,11 @@ namespace CarSales.Demo.Api.Model
     {
         [Required]
         [RegularExpression(@"^[0-9]{1,}$")]
-        public int Doors { get; set; }
+        [Display(Order = 3)]
+        public int Seats { get; set; }
 
         [Required]
-        public string Engine { get; set; }
-
-        [Required]
+        [Display(Order = 4)]
         [RegularExpression(@"^[0-9]{1,}$")]
         public int Floors { get; set; }
 

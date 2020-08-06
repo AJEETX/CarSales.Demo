@@ -15,7 +15,7 @@ namespace CarSales.Demo.Api.Domain.Helper
                 Doors = 5,
                 Wheels = 6,
                 BodyType = "SUV",
-                Engine = "1000CC"
+                Seats = 4
             });
         }
     }

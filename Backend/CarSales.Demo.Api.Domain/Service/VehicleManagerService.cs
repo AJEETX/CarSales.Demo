@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CarSales.Demo.Api.Domain.Service
@@ -49,7 +50,7 @@ namespace CarSales.Demo.Api.Domain.Service
             {
                 //log
             }
-            return vehicleDetails;
+            return vehicleDetails.OrderBy(a => a.Order);
         }
         public async Task<Vehicle> AddVehicle(JObject vehicleJObject)
         {

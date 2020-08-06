@@ -56,6 +56,7 @@ namespace CarSales.Demo.Api.Domain.Service
                     Name = prop.Name,
                     Datatype = prop.PropertyType.Name,
                     Required = prop.GetCustomAttributes(typeof(RequiredAttribute), true).Any() ? true : false,
+                    Order = prop.GetCustomAttributes(typeof(DisplayAttribute), true).Any() ? ((DisplayAttribute)(prop.GetCustomAttributes(typeof(DisplayAttribute), true)[0])).Order : 0,
                     Regex = prop.GetCustomAttributes(typeof(RegularExpressionAttribute), true).Any() ? ((RegularExpressionAttribute)(prop.GetCustomAttributes(typeof(RegularExpressionAttribute), true)[0])).Pattern : ""
                 };
             }

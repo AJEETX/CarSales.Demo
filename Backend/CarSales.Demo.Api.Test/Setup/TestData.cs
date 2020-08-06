@@ -18,7 +18,7 @@ namespace CarSales.Demo.Api.Test.Setup
                 Doors = 5,
                 Wheels = 6,
                 BodyType = "SUV",
-                Engine = "1000CC"
+                Seats = 4
             });
         }
         public static JObject AnotherSampleObject()
@@ -32,7 +32,7 @@ namespace CarSales.Demo.Api.Test.Setup
             carObject.Doors = 5;
             carObject.Wheels = 6;
             carObject.BodyType = "SUV";
-            carObject.Engine = "1000CC";
+            carObject.Seats = 2;
             return carObject;
         }
     }

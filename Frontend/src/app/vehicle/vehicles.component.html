@@ -13,14 +13,14 @@
                       <th class="pt-3-half text-center">#</th>
                       <th class="pt-3-half text-center">Make</th>
                       <th class="pt-3-half text-center">Model</th>
-                      <th class="pt-3-half text-center">Engine</th>
-                      <th class="pt-3-half text-center">Type</th>
+                      <th class="pt-3-half text-center">Seats</th>
+                      <th class="pt-3-half text-center">BodyType</th>
                     </tr>
                     <tr  *ngFor="let vehicle of vehicles let i = index">
                       <td class="pt-3-half">{{i+1}}</td>
                       <td class="pt-3-half">{{vehicle.Make}}</td>
                       <td class="pt-3-half">{{vehicle.Model}}</td>
-                      <td class="pt-3-half">{{vehicle.Engine}}</td>
+                      <td class="pt-3-half">{{vehicle.Seats}}</td>
                       <td class="pt-3-half">{{vehicle.VehicleType}}</td>
                     </tr>
                   </table>

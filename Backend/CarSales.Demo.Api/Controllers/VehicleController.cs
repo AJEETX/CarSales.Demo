@@ -55,7 +55,6 @@ namespace CarSales.Demo.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<VehicleDetail>>> GetVehicleProperties(string type)
-
         {
             if (string.IsNullOrEmpty(type)) return BadRequest(ModelState);
 
