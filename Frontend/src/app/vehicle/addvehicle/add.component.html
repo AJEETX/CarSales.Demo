@@ -7,8 +7,7 @@
         <form *ngIf='vehicleProps' novalidate (ngSubmit)='onSubmit(form.value)' [formGroup]="form">
           <div *ngFor="let prop of vehicleProps let i = index">
             <label [attr.for]="prop" class="control-label required">{{prop.Name}}</label>
-            <input type="text" [id]="i" [formControlName]= "prop.Name" [pattern]= "prop.Regex" class="form-control" [required] = "prop.Required">
-              <span *ngIf="!form.get(prop.Name).valid && form.get(prop.Name).touched" class="help-block"> Please enter {{prop.Name}} </span>
+            <input autofocus type="text" [id]="prop.Name" [formControlName]= "prop.Name" [pattern]= "prop.Regex" class="form-control" [required] = "prop.Required">
           </div> 
           <br>
             <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Add {{requestedvehicletype}}</button>

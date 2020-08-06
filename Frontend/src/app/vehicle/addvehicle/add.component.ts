@@ -40,9 +40,11 @@ export class AddComponent implements OnInit, OnDestroy {
     }
 
     onSubmit() {
-      this.vehicleService.addVehicle(this.form.value).subscribe(data => {
-      });
-      this.router.navigate(['/']);
+      if(!this.form.invalid){
+        this.vehicleService.addVehicle(this.form.value).subscribe(data => {
+        });
+        this.router.navigate(['/']);
+      }
     }
 
     cancel() {

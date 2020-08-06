@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class HomeComponent implements OnInit {
   errormessage$: Observable<any>;
   vehicletypes$: Observable<any>;
-  customErrorMessage='Server is down !!!'
+  customErrorMessage=' Server is down !!!'
   constructor(private vehicleService: VehicleService) { }
 
   ngOnInit() {
