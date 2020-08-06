@@ -71,7 +71,7 @@ The repository consists of projects as below:
 >   
 >   4. Now in order to run the front end application, type `npm start` on the terminal
 >   
->   5. Shortly default browser shall open with url as `localhost:5000`, and the page shall be displayed as below. For better experience please use chrome browser
+>   5. The default browser shall open with url as `localhost:5000`, and the page shall be displayed as below. For better experience please use chrome browser
 >
 >   <img width=“1469” alt=“list” src="https://github.com/AJEETX/CarSales.Demo/blob/master/client.PNG">
 

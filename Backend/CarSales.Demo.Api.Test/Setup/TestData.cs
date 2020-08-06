@@ -1,12 +1,9 @@
 ﻿using CarSales.Demo.Api.Model;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CarSales.Demo.Api.Test.Setup
 {
-    class TestData
+    internal static class TestData
     {
         public static JObject SampleObject()
         {
