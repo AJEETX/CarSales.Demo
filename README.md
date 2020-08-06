@@ -4,6 +4,10 @@
 
 ---------------------------------------
 
+<img width=“100%” alt=“list” src="https://github.com/AJEETX/CarSales.Demo/blob/master/demo.gif">
+
+
+
 ## Repository codebase
  
 The repository consists of projects as below:
