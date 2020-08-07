@@ -69,19 +69,13 @@ The repository consists of projects as below:
    
 >   1. Within **Visual Studio Code** open a command terminal by pressing the computer keyboard buttons `Control` and `~`
 >    
->   2. Within the terminal, browse to  root location of  class library project [**"Backend/CarSales.Demo.Api.Domain"**]
->  
->   3. Restore the dependencies, type `dotnet restore` on the terminal
->    
->   4. Within the terminal, browse to  root location of webapi project [**"Backend/CarSales.Demo.Api"**]
->  
->   5. Restore the dependencies, type `dotnet restore` on the terminal
+>   2. Within the terminal, browse to  root location of webapi project [**"Backend/CarSales.Demo.Api"**]
 >
->   6. Run the webapi project, type `dotnet run` on the terminal
+>   3. Run the webapi project, type `dotnet run` on the terminal
 >   
->   7. **CarSales.Demo.Api** shall start running on port **3000**
+>   4. **CarSales.Demo.Api** shall start running on port **3000**. Please note that any other application should not be listening on port 3000 on the computer
 >
->   8. To verify the Webapi is running, open the url **http://localhost:3000** in chrome browser, the page shall be displayed as below
+>   5. To verify the Webapi is running, open the url **http://localhost:3000** in chrome browser, the page shall be displayed as below
 >
 >   <img width=“1469” alt=“list” src="https://github.com/AJEETX/CarSales.Demo/blob/master/swagger.PNG">
 
@@ -104,7 +98,9 @@ The repository consists of projects as below:
 >   
 >   4. Now in order to run the front end application, type `npm start` on the terminal
 >   
->   5. The default browser shall open with url as `localhost:5000`, and the page shall be displayed as below. For better experience please use chrome browser
+>   5. The default browser shall open with url as `localhost:5000`, and the page shall be displayed as below. For better experience please use chrome browser.
+>
+>   6. . Please note that any other application should not be listening on port 5000 on the computer
 >
 >   <img width=“1469” alt=“list” src="https://github.com/AJEETX/CarSales.Demo/blob/master/client.PNG">
 
