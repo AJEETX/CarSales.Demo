@@ -69,15 +69,19 @@ The repository consists of projects as below:
    
 >   1. Within **Visual Studio Code** open a command terminal by pressing the computer keyboard buttons `Control` and `~`
 >    
->   2. Within the terminal, browse to  root location of  webapi project [**"Backend/CarSales.Demo.Api"**]
+>   2. Within the terminal, browse to  root location of  class library project [**"Backend/CarSales.Demo.Api.Domain"**]
 >  
 >   3. Restore the dependencies, type `dotnet restore` on the terminal
+>    
+>   4. Within the terminal, browse to  root location of webapi project [**"Backend/CarSales.Demo.Api"**]
+>  
+>   5. Restore the dependencies, type `dotnet restore` on the terminal
 >
->   4. Run the webapi project, type `dotnet run` on the terminal
+>   6. Run the webapi project, type `dotnet run` on the terminal
 >   
->   5. **Webapi** [backend service] shall start running on port **3000**
+>   7. **CarSales.Demo.Api** shall start running on port **3000**
 >
->   6. To verify the Webapi is running, open the url **http://localhost:3000** in chrome browser, the page shall be displayed as below
+>   8. To verify the Webapi is running, open the url **http://localhost:3000** in chrome browser, the page shall be displayed as below
 >
 >   <img width=“1469” alt=“list” src="https://github.com/AJEETX/CarSales.Demo/blob/master/swagger.PNG">
 
