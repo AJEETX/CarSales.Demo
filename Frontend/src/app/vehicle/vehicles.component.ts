@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../shared/services/vehicle.service';
 import { Subscription, Observable } from 'rxjs';
 
@@ -7,10 +7,9 @@ import { Subscription, Observable } from 'rxjs';
   templateUrl: './vehicles.component.html',
   styleUrls: ['./vehicles.component.css']
 })
-export class VehiclesComponent implements OnInit, OnDestroy {
+export class VehiclesComponent implements OnInit {
   vehicles:any;
   errormessage$: Observable<any>;
-  private subscription: Subscription;
   public Loading = false;
   constructor(private vehicleService: VehicleService) {
    }
@@ -18,15 +17,11 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.Loading = true;
     setTimeout(() => {
-      this.subscription = this.vehicleService.getAllVehicles().subscribe(data => {
+      this.vehicleService.getAllVehicles().subscribe(data => {
         this.vehicles = data;
         this.Loading = false;
         });
         this.errormessage$ = this.vehicleService.errorMessage;
     }, 1000);
    }
-
-   ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
-}

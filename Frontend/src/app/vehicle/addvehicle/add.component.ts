@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { VehicleService } from '../../shared/services/vehicle.service';
 import { Subscription } from 'rxjs';
@@ -9,10 +9,9 @@ import { FormGroup, FormControl} from '@angular/forms';
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css']
 })
-export class AddComponent implements OnInit, OnDestroy {
+export class AddComponent implements OnInit {
   requestedvehicletype: string;
-  vehicleProps: any[];
-  private subscription: Subscription;
+  vehicleProps;
   form: FormGroup;
   IdProp = ['Id', 'VehicleType'];
 
@@ -24,19 +23,17 @@ export class AddComponent implements OnInit, OnDestroy {
       }
 
   ngOnInit() {
-      this.subscription = this.dataService.vehiclePropsChanged.subscribe((vehicles: any) => {
-        this.vehicleProps = vehicles.filter(d => !this.IdProp.includes(d.Name));
-        this.buildForm();
+      this.dataService.vehiclePropsChanged.subscribe((vehicles) => {
+        this.vehicleProps = vehicles.filter(d => 
+          !this.IdProp.includes(d.Name)
+          );
+          const formGroup = {};
+          for (const prop of this.vehicleProps) {
+            formGroup[prop['Name']] = new FormControl(null);
+          }
+          formGroup['VehicleType'] = new FormControl(this.requestedvehicletype);
+          this.form = new FormGroup(formGroup);
           });
-    }
-
-    buildForm() {
-      const formGroup = {};
-      for (const prop of Object.values(this.vehicleProps)) {
-        formGroup[prop['Name']] = new FormControl(null);
-      }
-      formGroup['VehicleType'] = new FormControl(this.requestedvehicletype);
-      this.form = new FormGroup(formGroup);
     }
 
     onSubmit() {
@@ -50,8 +47,4 @@ export class AddComponent implements OnInit, OnDestroy {
     cancel() {
       this.router.navigate(['']);
     }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
 }

@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 export class DataService {
   vehiclePropsChanged = new Subject<any>();
   constructor() {}
-  setVehicleProps(_vehicleProps: any) {
+  setVehicleProps(_vehicleProps) {
     this.vehiclePropsChanged.next(_vehicleProps.slice());
   }
 }

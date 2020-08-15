@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  errormessage$: Observable<any>;
-  vehicletypes$: Observable<any>;
+  errormessage$;
+  vehicletypes$;
   customErrorMessage=' Server is down !!!'
   constructor(private vehicleService: VehicleService) { }
 
