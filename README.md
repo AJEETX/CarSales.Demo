@@ -108,3 +108,4 @@ The repository consists of projects as below:
 happy coding :)
 ```
 ![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fgithub.com%2Fajeetx%2FCarSales.Demo)
+[![HitCount](http://hits.dwyl.com/ajeetx/carsales.demo.svg)](http://hits.dwyl.com/ajeetx/carsales.demo)
