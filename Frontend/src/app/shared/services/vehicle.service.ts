@@ -3,21 +3,22 @@ import { HttpClient } from '@angular/common/http';
 import { throwError,Observable, Subject } from 'rxjs';
 import { DataService } from './data.service';
 import {environment} from '../../../environments/environment';
-import { catchError } from 'rxjs/operators';
+import { catchError, shareReplay } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
 relativeUrl='/api/vehicle';
 private alertMessage$ = new Subject<string>();
+private vehicleTypes$:Observable<string[]>;
 constructor(private http: HttpClient, private dataservice: DataService) { }
 
   getVehicleTypes() {
-    return this.http.get<string[]>(environment.baseUrl + this.relativeUrl+ '/types').
-    pipe(catchError(error => {
-      this.alertMessage$.next(error.message);
-      return throwError(error.message);
-    } ));
+    if(!this.vehicleTypes$){
+      this.vehicleTypes$=this.http.get<string[]>(environment.baseUrl + this.relativeUrl+ '/types').
+        pipe(shareReplay(1)) as Observable<string[]>;
+    }
+    return this.vehicleTypes$;
   }
   get errorMessage() {
     return this.alertMessage$;
