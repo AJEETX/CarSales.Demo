@@ -11,6 +11,7 @@ export class VehicleService {
 relativeUrl='/api/vehicle';
 private alertMessage$ = new Subject<string>();
 private vehicleTypes$:Observable<string[]>;
+private vehicleProperties$:Observable<string[]>;
 constructor(private http: HttpClient, private dataservice: DataService) { }
 
   getVehicleTypes() {
@@ -25,22 +26,28 @@ constructor(private http: HttpClient, private dataservice: DataService) { }
   }
   getAllVehicles()  {
     return this.http.get(environment.baseUrl+ this.relativeUrl).
-    pipe(catchError(error => {
-      this.alertMessage$.next(error.message);
-      return throwError(error.message);
-    } ));
+      pipe(catchError(error => {
+        this.alertMessage$.next(error.message);
+        return throwError(error.message);
+      } ));
   }
   getVehicleProperties(type: string) {
-    return this.http.get(environment.baseUrl + this.relativeUrl+ '/' + type).subscribe((response: any) =>{
-      this.dataservice.setVehicleProps(response);
-    });
+    return this.http.get(environment.baseUrl + this.relativeUrl+ '/' + type).
+      pipe(shareReplay(1),catchError(error => {
+        this.alertMessage$.next(error.message);
+        return throwError(error.message);
+      } ));
   }
-
+  // getVehicleProperties(type: string) {
+  //   return this.http.get(environment.baseUrl + this.relativeUrl+ '/' + type).subscribe((response: any) =>{
+  //     this.dataservice.setVehicleProps(response);
+  //   });
+  // }
   addVehicle(newVehicle): Observable<any> {
     return this.http.post<any>(environment.baseUrl+ this.relativeUrl, newVehicle).
-    pipe(catchError(error => {
-      this.alertMessage$.next(error.message);
-      return throwError(error.message);
-    } ));
+      pipe(catchError(error => {
+        this.alertMessage$.next(error.message);
+        return throwError(error.message);
+      } ));
   }
 }

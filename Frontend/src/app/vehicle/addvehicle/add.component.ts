@@ -19,10 +19,12 @@ export class AddComponent implements OnInit {
       this.route.params.subscribe((params: Params) => {
           this.requestedvehicletype = params['type'];
         });
-      this.vehicleService.getVehicleProperties(this.requestedvehicletype);
       }
 
   ngOnInit() {
+    this.vehicleService.getVehicleProperties(this.requestedvehicletype).subscribe((response: any) =>{
+      this.dataService.setVehicleProps(response);
+    });
       this.dataService.vehiclePropsChanged.subscribe((vehicles) => {
         this.vehicleProps = vehicles.filter(d => 
           !this.IdProp.includes(d.Name)
