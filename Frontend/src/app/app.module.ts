@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app.router';
 import { AppComponent } from './app.component';
 import { VehiclesComponent } from './vehicle/vehicles.component';
 import { VehicleService} from './shared/services/vehicle.service';
-import { DataService} from './shared/services/data.service';
 import { DropdownDirective } from './shared/directive/dropdowndirective';
 import { FocusDirective } from './shared/directive/focusdirective';
 import { ErrorComponent } from './shared/error/error.component';
@@ -30,7 +29,7 @@ import { AddComponent } from './vehicle/addvehicle/add.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [VehicleService, DataService],
+  providers: [VehicleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
