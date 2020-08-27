@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 import {ErrorComponent} from './shared/error/error.component';
 import {VehiclesComponent} from './vehicle/vehicles.component';
 import {AddComponent} from './vehicle/addvehicle/add.component';
-
 import {HomeComponent} from './home/home.component';
 
 const appRoute: Routes = [

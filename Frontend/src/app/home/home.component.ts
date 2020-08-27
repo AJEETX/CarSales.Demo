@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {VehicleService} from '../shared/services/vehicle.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',

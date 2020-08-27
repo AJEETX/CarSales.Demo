@@ -8,7 +8,7 @@
                   <div class="text-center">
                     <p class="lead" *ngIf = 'Loading'><img src="assets/images/ajax-loader.gif" alt="Loading"></p>
                   </div>
-                  <table *ngIf="vehicles?.length>0" class="table table-bordered text-center">
+                  <table *ngIf="(vehicles | async)?.length>0" class="table table-bordered text-center">
                     <tr>
                       <th class="pt-3-half text-center">#</th>
                       <th class="pt-3-half text-center">Make</th>
@@ -16,7 +16,7 @@
                       <th class="pt-3-half text-center">Seats</th>
                       <th class="pt-3-half text-center">BodyType</th>
                     </tr>
-                    <tr  *ngFor="let vehicle of vehicles let i = index">
+                    <tr  *ngFor="let vehicle of (vehicles | async) let i = index">
                       <td class="pt-3-half">{{i+1}}</td>
                       <td class="pt-3-half">{{vehicle.Make}}</td>
                       <td class="pt-3-half">{{vehicle.Model}}</td>
@@ -24,7 +24,7 @@
                       <td class="pt-3-half">{{vehicle.VehicleType}}</td>
                     </tr>
                   </table>
-                  <div class="text-center" *ngIf="vehicles?.length==0">No vehicles to display</div>
+                  <div class="text-center" *ngIf="(vehicles | async)?.length==0">No vehicles to display</div>
                 </div>
               </div>
             </span>

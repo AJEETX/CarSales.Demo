@@ -15,7 +15,7 @@ export class AddComponent {
   constructor(private route: ActivatedRoute, private router: Router, private vehicleService: VehicleService) {
       this.route.params.subscribe((params: Params) => {
         this.requestedvehicletype= params['type'];
-          this.vehicleService.getVehicleProperties(params['type']).subscribe((vehicles: any) =>{
+          this.vehicleService.getVehicleProperties(this.requestedvehicletype).subscribe((vehicles: any) =>{
             this.vehicleProps = vehicles.filter(d => 
               !this.IdProp.includes(d.Name)
               );
@@ -23,7 +23,7 @@ export class AddComponent {
               for (const prop of this.vehicleProps) {
                 formGroup[prop['Name']] = new FormControl(null);
               }
-              formGroup['VehicleType'] = new FormControl(params['type']);
+              formGroup['VehicleType'] = new FormControl(this.requestedvehicletype);
               this.form = new FormGroup(formGroup);
           });
         });
