@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { VehiclesComponent } from './vehicle/vehicles.component';
 import { VehicleService} from './shared/services/vehicle.service';
 import { DropdownDirective } from './shared/directive/dropdowndirective';
-import { FocusDirective } from './shared/directive/focusdirective';
+import { FocusDirective } from './shared/directive/focusDirective';
 import { ErrorComponent } from './shared/error/error.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

@@ -29,7 +29,8 @@ export class VehicleService {
   getAllVehicles()  {
       return this.http.get(environment.baseUrl+ this.relativeUrl).
         pipe(map(res=>{
-          return res
+          console.log(res);
+          return res;
         }, catchError(error => {
           this.alertMessage$.next(error.message);
           return throwError(error.message);

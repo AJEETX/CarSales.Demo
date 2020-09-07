@@ -18,7 +18,6 @@ export class VehiclesComponent implements OnInit {
   ngOnInit() {
     this.Loading = true;
       this.vehicles=this.vehicleService.getAllVehicles().pipe(
-        delay(100),
       tap(_ => (this.Loading = false)));
    }
   }
