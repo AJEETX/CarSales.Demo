@@ -28,7 +28,7 @@ namespace CarSales.Demo.Api
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
-                    Title = "Car sales API",
+                    Title = "Car sales API1.0",
                 });
                 c.OperationFilter<ExamplesOperationFilter>();
             });
