@@ -40,7 +40,7 @@ namespace CarSales.Demo.Api
                 .UseSwagger().UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "CarSales Demo Api");
-                    c.RoutePrefix = "";
+                    c.RoutePrefix = string.Empty;
                 });
         }
     }
